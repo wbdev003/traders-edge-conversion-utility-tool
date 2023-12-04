@@ -38,7 +38,24 @@ const FormStructure: React.FC<FormStructureProps> = ({
         <CardDescription className="text-md">{description}</CardDescription>
       </CardHeader>
       <CardContent className="p-0 m-0 mt-4"> {children}</CardContent>
-      <div className="w-full flex items-center justify-end mt-14">
+      <div
+        className={`w-full flex items-center ${
+          formStep === 1 ? "justify-end" : "justify-between"
+        }  mt-14`}
+      >
+        {formStep > 1 ? (
+          <Button
+            className="flex m-0 w-fit p-0 px-2 pr-4"
+            onClick={() => {
+              setFormStep(formStep - 1);
+            }}
+          >
+            <Icons type="back" size={20} color="white" />
+            <p className="pl-1">Go Back</p>
+          </Button>
+        ) : (
+          <></>
+        )}
         {brokerSelection === null ? (
           <Button disabled className="flex m-0 w-fit p-0 px-2 pl-5">
             <p>{buttonTitle}</p>

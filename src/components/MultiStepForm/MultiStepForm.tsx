@@ -5,22 +5,48 @@ import FormStructure from "./FormStructure/FormStructure";
 import { useFormStepStore } from "@/store/useFormStepStore";
 import PrimaryStep from "./FormSteps/PrimaryStep";
 import SecondaryStep from "./FormSteps/SecondaryStep";
-import Third from "./FormSteps/ThirdStep";
+import ThirdStep from "./FormSteps/ThirdStep";
 
-const MultiStepForm = () => {
+// Define an interface for form fields
+interface FormFields {
+  title: string;
+  description: string;
+  buttonTitle: string;
+}
+
+const MultiStepForm: React.FC = () => {
   /* State */
-  const { brokerSelection, setBrokerSelection } = useSelectionStore(); // Data array for SelectOptionCard components
+  const { brokerSelection, setBrokerSelection } = useSelectionStore();
   const { formStep, setFormStep } = useFormStepStore();
+
+  // Define dynamic form fields based on formStep
+  const formFields: Record<number, FormFields> = {
+    1: {
+      title: "Choose Your Broker",
+      description: "Select Your Broker",
+      buttonTitle: "Next Step",
+    },
+    2: {
+      title: "Import Trade CSV File",
+      description: "Import Your Trade CSV File Here.",
+      buttonTitle: "Upload & Process",
+    },
+    3: {
+      title: "Your Third Step Title",
+      description: "Your Third Step Description",
+      buttonTitle: "Submit",
+    },
+  };
 
   return (
     <FormStructure
-      title="Choose Your Broker"
-      description="Select Your Broker"
-      buttonTitle="Next Step"
+      title={formFields[formStep].title}
+      description={formFields[formStep].description}
+      buttonTitle={formFields[formStep].buttonTitle}
     >
       {formStep === 1 && <PrimaryStep />}
       {formStep === 2 && <SecondaryStep />}
-      {formStep === 3 && <Third />}
+      {formStep === 3 && <ThirdStep />}
     </FormStructure>
   );
 };
