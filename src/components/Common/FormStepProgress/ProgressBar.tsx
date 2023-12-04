@@ -8,7 +8,12 @@ interface IProgressBar {
 const ProgressBar = ({ stepProgress }: IProgressBar) => {
   return (
     <>
-      <Progress value={1} max={3} className="w-full text-blue " />
+      <Progress
+        value={(1 / 3) * 100}
+        max={3}
+        color=""
+        className="w-full bg-slate-300 "
+      />
     </>
   );
 };
