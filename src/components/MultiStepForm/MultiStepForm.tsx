@@ -29,7 +29,7 @@ const MultiStepForm: React.FC = () => {
     2: {
       title: "Import Trade CSV File",
       description: "Import Your Trade CSV File Here.",
-      buttonTitle: "Upload & Process",
+      buttonTitle: "Upload",
     },
     3: {
       title: "Your Third Step Title",

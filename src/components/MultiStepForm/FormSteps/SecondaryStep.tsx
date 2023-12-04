@@ -8,9 +8,9 @@ const SecondaryStep = () => {
   };
 
   return (
-    <div>
+    <>
       <FileUpload onFileDrop={handleFileDrop} />
-    </div>
+    </>
   );
 };
 

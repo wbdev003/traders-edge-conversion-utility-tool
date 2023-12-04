@@ -26,8 +26,8 @@ export function SelectOptionCard({ title, img, index }: ISelectOptionCard) {
   return (
     <Card
       className={`w-fit mx-auto px-4 py-2 text-center rounded-3xl shadow-xl 
-        border-slate-300 border-solid border-2 ${
-          brokerSelection === index ? "bg-slate-400" : "bg-white"
+        border-slate-400 border-solid border-2 ${
+          brokerSelection === index ? "bg-slate-300" : "bg-white"
         }`}
       onClick={handleClick}
       isPressable

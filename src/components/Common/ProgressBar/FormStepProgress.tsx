@@ -15,7 +15,7 @@ const FormStepProgress = () => {
           <div className=" flex w-full items-center justify-between mb-4">
             <p className="text-slate-500 font-normal text-base">{`Step ${formStep} of 3`}</p>
             <Button className="rounded-full hover:bg-slate-200 bg-transparent w-fit p-1 m-0 h-fit shadow-none">
-              <Icons type="close" color="black" size={22} />
+              <Icons type="close" color="black" size={20} />
             </Button>
           </div>
           <ProgressBar stepProgress={formStep} />

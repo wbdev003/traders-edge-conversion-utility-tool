@@ -65,7 +65,7 @@ const FormStructure: React.FC<FormStructureProps> = ({
           <Button
             className="flex m-0 w-fit p-0 px-2 pl-5"
             onClick={() => {
-              setFormStep(2);
+              setFormStep(formStep + 1);
             }}
           >
             <p>{buttonTitle}</p>
