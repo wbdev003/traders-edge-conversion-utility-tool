@@ -1,7 +1,18 @@
 import React from "react";
-
+import Nav from "../Common/Nav/Nav";
+import Container from "../Common/Utils/Container/Container";
+import SubHeader from "../Common/SubHeader/SubHeader";
+import FormStepProgress from "../Common/FormStepProgress/FormStepProgress";
+import Divider from "../Common/Divider/Divider";
 const MainLayout = () => {
-  return <div>MainLayout</div>;
+  return (
+    <div className="bg-slate-200 min-h-screen h-full">
+      <Nav />
+      <SubHeader />
+      <Divider width="2" />
+      <FormStepProgress />
+    </div>
+  );
 };
 
 export default MainLayout;
