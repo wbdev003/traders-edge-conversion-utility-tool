@@ -11,7 +11,7 @@ const brokerData = [
   { img: tdLogo, title: "TD Direct Investing", identifier: "td" },
   { img: rbcLogo, title: "RBC Direct Investing", identifier: "rbc" },
 ];
-const PrimaryStep = () => {
+const SelectBrokerStep = () => {
   return (
     <div className="mt-8 grid gap-2 gap-y-10 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
       {brokerData.map((broker, index) => (
@@ -27,4 +27,4 @@ const PrimaryStep = () => {
   );
 };
 
-export default PrimaryStep;
+export default SelectBrokerStep;

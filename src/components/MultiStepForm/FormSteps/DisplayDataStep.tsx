@@ -1,6 +1,6 @@
 import React from "react";
 import FileConvertLayout from "@/components/Features/FileConvert/FileConvertLayout";
-const ThirdStep = () => {
+const DisplayDataStep = () => {
   return (
     <>
       <FileConvertLayout />
@@ -8,4 +8,4 @@ const ThirdStep = () => {
   );
 };
 
-export default ThirdStep;
+export default DisplayDataStep;

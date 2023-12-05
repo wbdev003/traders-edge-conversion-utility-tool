@@ -5,6 +5,7 @@ import SubHeader from "../Common/SubHeader/SubHeader";
 import FormStepProgress from "../Common/ProgressBar/FormStepProgress";
 import Divider from "../Common/Divider/Divider";
 import MultiStepForm from "../MultiStepForm/MultiStepForm";
+import Modal from "../Common/Modal/Modal";
 
 const MainLayout = () => {
   return (
@@ -16,6 +17,7 @@ const MainLayout = () => {
       <Container>
         <MultiStepForm />
       </Container>
+      <Modal />
     </div>
   );
 };

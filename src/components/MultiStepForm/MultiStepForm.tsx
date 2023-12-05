@@ -25,6 +25,11 @@ const MultiStepForm: React.FC = () => {
 
   // Define dynamic form fields based on formStep
   const formFields: Record<number, FormFields> = {
+    0: {
+      title: "Get Started",
+      description: "Begin Conversion",
+      buttonTitle: "Get Started",
+    },
     1: {
       title: "Choose Your Broker",
       description: "Select Your Broker",
@@ -55,12 +60,12 @@ const MultiStepForm: React.FC = () => {
 
       <div
         className={`w-full flex items-center ${
-          formStep === 1 ? "justify-end" : "justify-between"
+          formStep === 0 ? "justify-end" : "justify-between"
         }  mt-14`}
       >
-        {formStep > 1 ? (
+        {formStep > 0 ? (
           <Button
-            className="flex m-0 w-fit p-0 px-2 pr-4"
+            className="flex m-0 w-fit p-0 px-2 pr-4 bg-slate-700"
             onClick={() => {
               setFormStep(formStep - 1);
             }}
@@ -72,13 +77,16 @@ const MultiStepForm: React.FC = () => {
           <></>
         )}
         {brokerSelection === null ? (
-          <Button disabled className="flex m-0 w-fit p-0 px-2 pl-5">
+          <Button
+            disabled
+            className="flex m-0 w-fit p-0 px-2 pl-5 bg-slate-700"
+          >
             <p>{formFields[formStep].buttonTitle}</p>
             <Icons type="next" size={25} color="white" />
           </Button>
         ) : (
           <Button
-            className="flex m-0 w-fit p-0 px-2 pl-5"
+            className="flex m-0 w-fit p-0 px-2 pl-5 bg-slate-700"
             onClick={() => {
               setFormStep(formStep + 1);
             }}

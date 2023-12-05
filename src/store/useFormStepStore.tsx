@@ -10,6 +10,6 @@ type Actions = {
 
 // Extend the state and actions with the new models
 export const useFormStepStore = create<State & Actions>((set) => ({
-  formStep: 1,
+  formStep: 0,
   setFormStep: (newFormStep: number) => set({ formStep: newFormStep }),
 }));
