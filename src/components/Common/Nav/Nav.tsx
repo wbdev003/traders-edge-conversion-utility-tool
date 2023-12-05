@@ -8,8 +8,8 @@ const Nav = () => {
     <div className=" bg-slate-800 py-4">
       <Container>
         <div className="flex items-center space-x-6">
-          <Image height={155} width={155} src={logo} alt="" />
-          <div className="text-slate-300 font-bold text-xs sm:text-sm ">
+          <Image height={145} width={145} src={logo} alt="" />
+          <div className="text-slate-200 font-semibold text-xs sm:text-sm ">
             Trade Conversion Utility Tool
           </div>
         </div>

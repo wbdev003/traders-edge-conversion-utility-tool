@@ -1,15 +1,30 @@
 import create from "zustand";
+import { FileRejection } from "react-dropzone";
 
 type State = {
-  files: File[];
+  fileDetails: File[];
+  fileData: unknown[];
+  rejected: FileRejection[];
+  convertedFileData: unknown[];
 };
 
 type Actions = {
-  setFiles: (newFormStep: File[]) => void;
+  setFileData: (newFile: unknown[]) => void;
+  setRejected: (newRejected: FileRejection[]) => void;
+  setFileDetails: (newFile: File[]) => void;
+  setConvertedFileData: (convertedFileData: unknown[]) => void;
 };
 
 // Extend the state and actions with the new models
-export const useFormStepStore = create<State & Actions>((set) => ({
-  files: [],
-  setFiles: (newFiles: File[]) => set({ files: newFiles }),
+export const useFileUploadStore = create<State & Actions>((set) => ({
+  fileData: [],
+  rejected: [],
+  fileDetails: [],
+  convertedFileData: [], // Initialize convertedFileData with an appropriate initial value
+  setFileDetails: (newFileDetails: File[]) =>
+    set({ fileDetails: newFileDetails }),
+  setFileData: (newFileData: unknown[]) => set({ fileData: newFileData }),
+  setRejected: (newRejected: FileRejection[]) => set({ rejected: newRejected }),
+  setConvertedFileData: (convertedFileData: unknown[]) =>
+    set({ convertedFileData: convertedFileData }),
 }));

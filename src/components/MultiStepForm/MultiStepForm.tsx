@@ -3,9 +3,12 @@ import * as React from "react";
 import { useSelectionStore } from "@/store/useSelectionStore";
 import FormStructure from "./FormStructure/FormStructure";
 import { useFormStepStore } from "@/store/useFormStepStore";
-import PrimaryStep from "./FormSteps/PrimaryStep";
-import SecondaryStep from "./FormSteps/SecondaryStep";
-import ThirdStep from "./FormSteps/ThirdStep";
+import SelectBrokerStep from "./FormSteps/SelectBrokerStep";
+import UploadFileStep from "./FormSteps/UploadFileStep";
+import DisplayDataStep from "./FormSteps/DisplayDataStep";
+import { Button } from "../ui/button";
+import Icons from "../Common/Icons/Icons";
+import { useFileUploadStore } from "@/store/useFileUploadStore";
 
 // Define an interface for form fields
 interface FormFields {
@@ -18,6 +21,7 @@ const MultiStepForm: React.FC = () => {
   /* State */
   const { brokerSelection, setBrokerSelection } = useSelectionStore();
   const { formStep, setFormStep } = useFormStepStore();
+  const { fileData, fileDetails } = useFileUploadStore();
 
   // Define dynamic form fields based on formStep
   const formFields: Record<number, FormFields> = {
@@ -32,8 +36,8 @@ const MultiStepForm: React.FC = () => {
       buttonTitle: "Upload",
     },
     3: {
-      title: "Your Third Step Title",
-      description: "Your Third Step Description",
+      title: "Your Trade Imports",
+      description: "Here are a list of your trades.",
       buttonTitle: "Submit",
     },
   };
@@ -44,9 +48,46 @@ const MultiStepForm: React.FC = () => {
       description={formFields[formStep].description}
       buttonTitle={formFields[formStep].buttonTitle}
     >
-      {formStep === 1 && <PrimaryStep />}
-      {formStep === 2 && <SecondaryStep />}
-      {formStep === 3 && <ThirdStep />}
+      {/* {formStep === 0 && <SelectBrokerStep />} */}
+      {formStep === 1 && <SelectBrokerStep />}
+      {formStep === 2 && <UploadFileStep />}
+      {formStep === 3 && <DisplayDataStep />}
+
+      <div
+        className={`w-full flex items-center ${
+          formStep === 1 ? "justify-end" : "justify-between"
+        }  mt-14`}
+      >
+        {formStep > 1 ? (
+          <Button
+            className="flex m-0 w-fit p-0 px-2 pr-4"
+            onClick={() => {
+              setFormStep(formStep - 1);
+            }}
+          >
+            <Icons type="back" size={20} color="white" />
+            <p className="pl-1">Go Back</p>
+          </Button>
+        ) : (
+          <></>
+        )}
+        {brokerSelection === null ? (
+          <Button disabled className="flex m-0 w-fit p-0 px-2 pl-5">
+            <p>{formFields[formStep].buttonTitle}</p>
+            <Icons type="next" size={25} color="white" />
+          </Button>
+        ) : (
+          <Button
+            className="flex m-0 w-fit p-0 px-2 pl-5"
+            onClick={() => {
+              setFormStep(formStep + 1);
+            }}
+          >
+            <p>{formFields[formStep].buttonTitle}</p>
+            <Icons type="next" size={25} color="white" />
+          </Button>
+        )}
+      </div>
     </FormStructure>
   );
 };

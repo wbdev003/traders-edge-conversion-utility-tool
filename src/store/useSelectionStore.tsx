@@ -1,16 +1,22 @@
 import create from "zustand";
 
-type State = {
-  brokerSelection: number | null;
+type SelectionState = {
+  brokerIndex: number | null;
+  brokerSelection: string;
 };
 
-type Actions = {
-  setBrokerSelection: (newBrokerSelection: number | null) => void;
+type SelectionActions = {
+  setBrokerIndex: (newBrokerIndex: number | null) => void;
+  setBrokerSelection: (newBrokerSelection: string) => void;
 };
 
-// Extend the state and actions with the new models
-export const useSelectionStore = create<State & Actions>((set) => ({
-  brokerSelection: null,
-  setBrokerSelection: (newBrokerSelection: number | null) =>
-    set({ brokerSelection: newBrokerSelection }),
-}));
+export const useSelectionStore = create<SelectionState & SelectionActions>(
+  (set) => ({
+    brokerIndex: null,
+    brokerSelection: "",
+    setBrokerIndex: (newBrokerIndex: number | null) =>
+      set({ brokerIndex: newBrokerIndex }),
+    setBrokerSelection: (newBrokerSelection: string) =>
+      set({ brokerSelection: newBrokerSelection }),
+  })
+);

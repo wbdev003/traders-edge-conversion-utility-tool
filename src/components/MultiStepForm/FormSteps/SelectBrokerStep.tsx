@@ -6,10 +6,10 @@ import tdLogo from "../../../../public/images/td-logo.png";
 import { SelectOptionCard } from "@/components/Common/Cards/SelectOptionCard";
 
 const brokerData = [
-  { img: scotiaItradeLogo, title: "Scotia iTrade" },
-  { img: questtradeLogo, title: "Quest Trade" },
-  { img: tdLogo, title: "TD Direct Investing" },
-  { img: rbcLogo, title: "RBC Direct Investing" },
+  { img: scotiaItradeLogo, title: "Scotia iTrade", identifier: "scotiabank" },
+  { img: questtradeLogo, title: "Quest Trade", identifier: "questrade" },
+  { img: tdLogo, title: "TD Direct Investing", identifier: "td" },
+  { img: rbcLogo, title: "RBC Direct Investing", identifier: "rbc" },
 ];
 const PrimaryStep = () => {
   return (
@@ -20,6 +20,7 @@ const PrimaryStep = () => {
           img={broker.img}
           title={broker.title}
           index={index}
+          identifier={broker.identifier}
         />
       ))}
     </div>

@@ -1,7 +1,7 @@
 import React from "react";
 import FileUpload from "@/components/Features/FileUpload/FileUpload";
 
-const SecondaryStep = () => {
+const UploadFileStep = () => {
   const handleFileDrop = (files: File[]) => {
     // Handle the dropped files here, e.g., send them to the server.
     console.log("Dropped files:", files);
@@ -14,4 +14,4 @@ const SecondaryStep = () => {
   );
 };
 
-export default SecondaryStep;
+export default UploadFileStep;
