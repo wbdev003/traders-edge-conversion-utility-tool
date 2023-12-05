@@ -8,9 +8,6 @@ import {
   CardDescription,
 } from "@/components/ui/card";
 import { ReactNode } from "react";
-import Icons from "@/components/Common/Icons/Icons";
-import { useSelectionStore } from "@/store/useSelectionStore";
-import { useFormStepStore } from "@/store/useFormStepStore";
 
 interface FormStructureProps {
   children: ReactNode;
@@ -23,15 +20,10 @@ const FormStructure: React.FC<FormStructureProps> = ({
   children,
   title,
   description,
-  buttonTitle,
 }) => {
-  /* State */
-  const { brokerSelection, setBrokerSelection } = useSelectionStore();
-  const { formStep, setFormStep } = useFormStepStore();
-
   return (
-    <Card className="mt-6 rounded-3xl p-7">
-      <CardHeader className="p-0 m-0 text-center">
+    <Card className="mt-6 rounded-xl p-7 bg-slate-50 shadow-md">
+      <CardHeader className="p-0 m-0 text-center ">
         <CardTitle className="text-2xl sm:text-3xl font-semibold text-slate-700">
           {title}
         </CardTitle>

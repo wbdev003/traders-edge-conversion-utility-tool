@@ -12,6 +12,8 @@ import {
 } from "@/components/ui/dialog";
 import { useModalStore } from "@/store/useModalStore";
 import { Separator } from "@/components/ui/separator";
+import logo from "../../../../public/images/traders-edge-logo.png";
+import Image from "next/image";
 
 const Modal = () => {
   /* State */
@@ -20,7 +22,7 @@ const Modal = () => {
   // Data for each step
   const steps = [
     {
-      title: "Get Started",
+      title: "Getting Started",
       content: [
         'Launch the conversion tool and select "Get Started."',
         "This step serves as an introduction to the conversion process.",
@@ -51,14 +53,14 @@ const Modal = () => {
         "If needed, make adjustments or corrections before proceeding to the final step.",
       ],
     },
-    {
+    /* {
       title: "Submit",
       content: [
         'Once you are satisfied with the imported data, click on "Submit" to finalize the conversion process.',
         "The tool will consolidate the data and generate a summary report for your reference.",
         "Review the summary to ensure all trades are accurately converted and imported.",
       ],
-    },
+    }, */
   ];
 
   return (
@@ -68,24 +70,26 @@ const Modal = () => {
         defaultOpen={toggleModal}
         onOpenChange={() => setToggleModal(!toggleModal)}
       >
-        <DialogContent className="p-4 md:p-6">
-          <DialogHeader>
-            <DialogTitle className="text-lg md:text-xl mb-2">
+        <DialogContent className=" ">
+          <DialogHeader className="  w-full ">
+            <div className=" w-full flex items-center justify-center my-2">
+              <Image height={180} width={180} src={logo} alt="" />
+            </div>
+            <DialogTitle className="text-base text-center md:text-left md:text-lg mb-2  text-slate-500">
               Trade Import Utility Conversion Tool
             </DialogTitle>
             <DialogDescription className="text-sm md:text-base text-left mb-4">
-              Welcome to the Trade Import Utility Conversion Tool, a tool
-              designed to streamline the process of converting and importing
-              your trade data. Follow these steps to ensure a smooth experience:
+              Welcome to the Trade Conversion Utility Tool – your solution for
+              effortlessly converting and importing trade data.
             </DialogDescription>
-            <Separator />
           </DialogHeader>
-          <div className="max-h-96 overflow-y-scroll space-y-4 w-full">
+          <Separator />
+          <div className="max-h-96 overflow-y-scroll space-y-4 w-full ">
             {steps.map((step, index) => (
               <DialogDescription className="w-11/12" key={index}>
-                <strong className="text-base md:text-lg text-slate-500 ">{`Step ${
-                  index + 1
-                }: ${step.title}`}</strong>
+                <strong className="text-base md:text-lg text-slate-500 ">{`${
+                  index > 0 ? `Step ${index}:` : ""
+                } ${step.title}`}</strong>
                 <ul className="list-disc pl-6 space-y-1 mt-1">
                   {step.content.map((item, i) => (
                     <li key={i} className="text-sm md:text-base">
@@ -97,13 +101,10 @@ const Modal = () => {
             ))}
 
             <DialogDescription className=" w-11/12">
-              <strong className="text-slate-500">Congratulations!</strong> You
-              have successfully completed the trade import process using our
-              conversion tool. This efficient utility ensures a hassle-free
-              experience, allowing you to focus on your trading strategies
-              without the burden of manual data entry. If you encounter any
-              issues or have questions, refer to the tool&apos;s documentation
-              or reach out to our support team for assistance. Happy trading!
+              <strong>Congratulations!</strong> You haveve successfully
+              completed the trade import process with our conversion tool. For
+              any issues or questions, consult the tool&apos;s documentation or
+              reach out to our support team. Happy trading!
             </DialogDescription>
           </div>
         </DialogContent>

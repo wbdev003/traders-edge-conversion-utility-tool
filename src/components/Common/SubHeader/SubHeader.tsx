@@ -9,7 +9,7 @@ import { useModalStore } from "@/store/useModalStore";
 const SubHeader = () => {
   const { toggleModal, setToggleModal } = useModalStore();
   return (
-    <div className="w-full font-semibold py-4 bg-slate-50  text-lg text-left">
+    <div className="w-full font-semibold py-4 bg-slate-50  text-lg text-left shadow-sm">
       <Container>
         <div className="flex items-center w-full justify-between">
           <p className="text-base sm:text-lg text-slate-700">

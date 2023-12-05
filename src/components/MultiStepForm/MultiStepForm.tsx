@@ -9,6 +9,8 @@ import DisplayDataStep from "./FormSteps/DisplayDataStep";
 import { Button } from "../ui/button";
 import Icons from "../Common/Icons/Icons";
 import { useFileUploadStore } from "@/store/useFileUploadStore";
+import GetStartedStep from "./FormSteps/GetStartedStep";
+import FormButtons from "./FormStructure/FormButtons";
 
 // Define an interface for form fields
 interface FormFields {
@@ -19,8 +21,8 @@ interface FormFields {
 
 const MultiStepForm: React.FC = () => {
   /* State */
-  const { brokerSelection, setBrokerSelection } = useSelectionStore();
-  const { formStep, setFormStep } = useFormStepStore();
+  const { brokerIndex } = useSelectionStore();
+  const { formStep } = useFormStepStore();
   const { fileData, fileDetails } = useFileUploadStore();
 
   // Define dynamic form fields based on formStep
@@ -41,7 +43,7 @@ const MultiStepForm: React.FC = () => {
       buttonTitle: "Upload",
     },
     3: {
-      title: "Your Trade Imports",
+      title: "Review Your Trade Imports",
       description: "Here are a list of your trades.",
       buttonTitle: "Submit",
     },
@@ -53,49 +55,42 @@ const MultiStepForm: React.FC = () => {
       description={formFields[formStep].description}
       buttonTitle={formFields[formStep].buttonTitle}
     >
-      {/* {formStep === 0 && <SelectBrokerStep />} */}
-      {formStep === 1 && <SelectBrokerStep />}
-      {formStep === 2 && <UploadFileStep />}
-      {formStep === 3 && <DisplayDataStep />}
-
-      <div
-        className={`w-full flex items-center ${
-          formStep === 0 ? "justify-end" : "justify-between"
-        }  mt-14`}
-      >
-        {formStep > 0 ? (
-          <Button
-            className="flex m-0 w-fit p-0 px-2 pr-4 bg-slate-700"
-            onClick={() => {
-              setFormStep(formStep - 1);
-            }}
-          >
-            <Icons type="back" size={20} color="white" />
-            <p className="pl-1">Go Back</p>
-          </Button>
-        ) : (
-          <></>
-        )}
-        {brokerSelection === null ? (
-          <Button
-            disabled
-            className="flex m-0 w-fit p-0 px-2 pl-5 bg-slate-700"
-          >
-            <p>{formFields[formStep].buttonTitle}</p>
-            <Icons type="next" size={25} color="white" />
-          </Button>
-        ) : (
-          <Button
-            className="flex m-0 w-fit p-0 px-2 pl-5 bg-slate-700"
-            onClick={() => {
-              setFormStep(formStep + 1);
-            }}
-          >
-            <p>{formFields[formStep].buttonTitle}</p>
-            <Icons type="next" size={25} color="white" />
-          </Button>
-        )}
-      </div>
+      {formStep === 0 && (
+        <>
+          <GetStartedStep />
+          <FormButtons
+            condition={false}
+            buttonTitle={formFields[formStep].buttonTitle}
+          />
+        </>
+      )}
+      {formStep === 1 && (
+        <>
+          <SelectBrokerStep />
+          <FormButtons
+            condition={brokerIndex === null}
+            buttonTitle={formFields[formStep].buttonTitle}
+          />
+        </>
+      )}
+      {formStep === 2 && (
+        <>
+          <UploadFileStep />
+          <FormButtons
+            condition={fileData.length === 0 && fileDetails.length === 0}
+            buttonTitle={formFields[formStep].buttonTitle}
+          />
+        </>
+      )}
+      {formStep === 3 && (
+        <>
+          <DisplayDataStep />
+          <FormButtons
+            condition={fileData.length === 0 && fileDetails.length === 0}
+            buttonTitle={formFields[formStep].buttonTitle}
+          />
+        </>
+      )}
     </FormStructure>
   );
 };
