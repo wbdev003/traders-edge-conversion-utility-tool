@@ -9,7 +9,7 @@ import Modal from "../Common/Modal/Modal";
 
 const MainLayout = () => {
   return (
-    <div className="bg-slate-200 min-h-screen h-full">
+    <div className="bg-slate-200 min-h-screen h-full pb-20">
       <Nav />
       <SubHeader />
       <Divider width="1" />

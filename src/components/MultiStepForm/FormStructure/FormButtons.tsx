@@ -16,9 +16,7 @@ const FormButtons = ({ condition, buttonTitle }: FormButtonsProps) => {
   const { formStep, setFormStep } = useFormStepStore();
   return (
     <div
-      className={`space-x-5 mt-10 flex items-center ${
-        formStep === 0 ? "justify-end" : "justify-end"
-      }  mt-14`}
+      className={`space-x-5 flex justify-center sm:justify-end items-center  mt-14`}
     >
       {formStep > 0 ? (
         <Button

@@ -63,7 +63,7 @@ const MultiStepForm: React.FC = () => {
       {formStep === 0 && (
         <>
           <GetStartedStep />
-          <div className="mb-100"></div>
+
           <FormButtons
             condition={false}
             buttonTitle={formFields[formStep].buttonTitle}

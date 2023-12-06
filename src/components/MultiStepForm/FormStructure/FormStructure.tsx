@@ -30,14 +30,14 @@ const FormStructure: React.FC<FormStructureProps> = ({
   const { processedData } = useFileUploadStore();
 
   return (
-    <Card className="mt-6 rounded-xl p-7 bg-slate-50 shadow-md max-h-fit min-h-[29.5rem] relative">
+    <Card className="mt-6 rounded-xl p-7 bg-slate-50 shadow-md min-h-fit ">
       <CardHeader className="p-0 m-0 text-center relative">
         <CardTitle className="text-2xl sm:text-3xl font-semibold text-slate-700">
           {title}
         </CardTitle>
         <CardDescription className="text-md">{description}</CardDescription>
         {formStep === 3 && (
-          <div className="w-full text-right">
+          <div className="w-full text-center sm:text-right py-4 sm:py-2">
             <DownloadCSVButton
               data={processedData}
               fileName="your_data_export_traders_edge.csv"

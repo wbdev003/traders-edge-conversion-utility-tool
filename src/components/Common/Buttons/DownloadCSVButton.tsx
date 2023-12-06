@@ -37,7 +37,7 @@ const DownloadCSVButton: React.FC<{
       className="bg-slate-700 m-0 p-0 px-2 pr-4 pl-5 w-fit text-slate-200"
       onClick={downloadCSV}
     >
-      <p className="pr-1"> Download CSV</p>
+      <p className="pr-1 ">Download CSV</p>
       <Icons type="download" size={20} color="white"></Icons>
     </Button>
   );
