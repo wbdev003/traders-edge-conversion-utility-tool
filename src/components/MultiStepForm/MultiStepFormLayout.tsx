@@ -12,6 +12,7 @@ import { useFileUploadStore } from "@/store/useFileUploadStore";
 import GetStartedStep from "./FormSteps/GetStartedStep";
 import FormButtons from "./FormStructure/FormButtons";
 import useLeavePageWarning from "@/hooks/useLeavePageWarning";
+import SuccessStep from "./FormSteps/SuccessStep";
 
 // Define an interface for form fields
 interface FormFields {
@@ -50,6 +51,12 @@ const MultiStepForm: React.FC = () => {
     3: {
       title: "Review Your Trade Imports",
       description: "Here are a list of your trades.",
+      buttonTitle: "Next Step",
+    },
+    4: {
+      title: "Success",
+      description:
+        "Congratulations! Your trades have been successfully imported.",
       buttonTitle: "Next Step",
     },
   };
@@ -95,6 +102,11 @@ const MultiStepForm: React.FC = () => {
             condition={fileData.length === 0 && fileDetails.length === 0}
             buttonTitle={formFields[formStep].buttonTitle}
           />
+        </>
+      )}
+      {formStep === 4 && (
+        <>
+          <SuccessStep />
         </>
       )}
     </FormStructure>
