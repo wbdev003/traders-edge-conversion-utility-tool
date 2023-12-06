@@ -1,6 +1,11 @@
 import { IoMdClose } from "react-icons/io";
 import { MdNavigateNext } from "react-icons/md";
-import { IoIosArrowBack, IoIosCloudUpload, IoIosHelp } from "react-icons/io";
+import {
+  IoIosArrowBack,
+  IoMdDownload,
+  IoIosCloudUpload,
+  IoIosHelp,
+} from "react-icons/io";
 
 interface IIcons {
   type: string;
@@ -18,6 +23,7 @@ const Icons = ({ type, size, color }: IIcons) => {
           upload: <IoIosCloudUpload size={size} color={color} />,
           close: <IoMdClose size={size} color={color} />,
           next: <MdNavigateNext size={size} color={color} />,
+          download: <IoMdDownload size={size} color={color} />,
         }[type]
       }
     </div>

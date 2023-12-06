@@ -12,7 +12,7 @@ const ProgressBar = ({ stepProgress }: IProgressBar) => {
         value={(stepProgress / 3) * 100}
         max={3}
         color=""
-        className="w-full bg-slate-300 "
+        className="w-full  bg-gradient-to-r from-slate-300 to-slate-400"
       />
     </>
   );

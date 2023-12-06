@@ -1,25 +1,24 @@
 import React from "react";
+import { Separator } from "@/components/ui/separator";
 
 const GetStartedStep = () => {
   return (
-    <div className="text-slate-700 font-normal max-w-md mx-auto pt-5">
-      <p className=" mb-6 text-center text-base">
-        Welcome to the Trade Import Utility Conversion Tool. Follow the steps
-        below to get started:
+    <div className="text-slate-700 font-normal max-w-xl mt-8 mx-auto py-3 px-10 bg-slate-200 rounded-xl shadow-lg border-slate-400 border-solid border-2">
+      <p className="text-center text-lg font-semibold mb-4">
+        Welcome to the Trade Conversion Utility Tool. Follow these steps to get
+        started:
       </p>
-      <ol className="list-decimal pl-6">
+      <div className="my-3 bg-slate-400 h-[0.15em]">
+        <Separator className="" />
+      </div>
+      <ul className="list-decimal pl-6">
         <li className="text-base mb-4">
-          Launch the conversion tool and select{" "}
-          <span className="font-semibold">&ldquo;Get Started.&rdquo;</span>
+          Click on {""}
+          <span className="font-semibold">&ldquo;Get Started.&rdquo;</span> to
+          begin the conversion process.
         </li>
-        <li className="text-base mb-4">
-          This step serves as an introduction to the conversion process.
-        </li>
-        <li className="text-base mb-4">
-          No specific action is required in this step; it is a brief overview to
-          initiate the process.
-        </li>
-      </ol>
+        {/* Add more list items for additional steps if needed */}
+      </ul>
     </div>
   );
 };

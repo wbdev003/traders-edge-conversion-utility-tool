@@ -7,15 +7,14 @@ import { errorCase } from "@/helpers/helpers";
 import { useSelectionStore } from "@/store/useSelectionStore";
 
 const FileConvertLayout = () => {
-  const { fileData } = useFileUploadStore();
+  const { fileData, processedData, setProcessedData } = useFileUploadStore();
   const { brokerSelection } = useSelectionStore();
-  const [processedData, setProcessedData] = useState<boolean | string[][]>([]);
 
   useEffect(() => {
     let res = errorCase(fileData, brokerSelection);
     setProcessedData(res);
     console.log(res);
-  }, [fileData, brokerSelection]);
+  }, [fileData, brokerSelection, setProcessedData]);
 
   return (
     <div>

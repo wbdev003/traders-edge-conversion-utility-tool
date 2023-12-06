@@ -11,6 +11,7 @@ import Icons from "../Common/Icons/Icons";
 import { useFileUploadStore } from "@/store/useFileUploadStore";
 import GetStartedStep from "./FormSteps/GetStartedStep";
 import FormButtons from "./FormStructure/FormButtons";
+import useLeavePageWarning from "@/hooks/useLeavePageWarning";
 
 // Define an interface for form fields
 interface FormFields {
@@ -24,6 +25,10 @@ const MultiStepForm: React.FC = () => {
   const { brokerIndex } = useSelectionStore();
   const { formStep } = useFormStepStore();
   const { fileData, fileDetails } = useFileUploadStore();
+
+  // Setting the initial state indicating whether changes are not saved
+  const notSaved = true;
+  useLeavePageWarning(notSaved); // handle leave page warning based on the notSaved state
 
   // Define dynamic form fields based on formStep
   const formFields: Record<number, FormFields> = {
@@ -40,12 +45,12 @@ const MultiStepForm: React.FC = () => {
     2: {
       title: "Import Trade CSV File",
       description: "Import Your Trade CSV File Here.",
-      buttonTitle: "Upload",
+      buttonTitle: "Next Step",
     },
     3: {
       title: "Review Your Trade Imports",
       description: "Here are a list of your trades.",
-      buttonTitle: "Submit",
+      buttonTitle: "Next Step",
     },
   };
 
@@ -58,6 +63,7 @@ const MultiStepForm: React.FC = () => {
       {formStep === 0 && (
         <>
           <GetStartedStep />
+          <div className="mb-100"></div>
           <FormButtons
             condition={false}
             buttonTitle={formFields[formStep].buttonTitle}

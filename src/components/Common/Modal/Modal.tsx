@@ -70,15 +70,15 @@ const Modal = () => {
         defaultOpen={toggleModal}
         onOpenChange={() => setToggleModal(!toggleModal)}
       >
-        <DialogContent className=" ">
-          <DialogHeader className="  w-full ">
+        <DialogContent className="bg-white ">
+          <DialogHeader className="  ">
             <div className=" w-full flex items-center justify-center my-2">
               <Image height={180} width={180} src={logo} alt="" />
             </div>
             <DialogTitle className="text-base text-center md:text-left md:text-lg mb-2  text-slate-500">
               Trade Import Utility Conversion Tool
             </DialogTitle>
-            <DialogDescription className="text-sm md:text-base text-left mb-4">
+            <DialogDescription className="text-sm md:text-base text-left mb-4 ">
               Welcome to the Trade Conversion Utility Tool – your solution for
               effortlessly converting and importing trade data.
             </DialogDescription>
@@ -86,7 +86,7 @@ const Modal = () => {
           <Separator />
           <div className="max-h-96 overflow-y-scroll space-y-4 w-full ">
             {steps.map((step, index) => (
-              <DialogDescription className="w-11/12" key={index}>
+              <DialogDescription className="w-10/12  " key={index}>
                 <strong className="text-base md:text-lg text-slate-500 ">{`${
                   index > 0 ? `Step ${index}:` : ""
                 } ${step.title}`}</strong>
@@ -100,11 +100,10 @@ const Modal = () => {
               </DialogDescription>
             ))}
 
-            <DialogDescription className=" w-11/12">
-              <strong>Congratulations!</strong> You haveve successfully
-              completed the trade import process with our conversion tool. For
-              any issues or questions, consult the tool&apos;s documentation or
-              reach out to our support team. Happy trading!
+            <DialogDescription className=" w-11/12  py-3 px-5 bg-slate-200 rounded-lg ">
+              <strong>Support:</strong> For any issues or questions, consult the
+              tool&apos;s documentation or reach out to our support team. Happy
+              trading!
             </DialogDescription>
           </div>
         </DialogContent>
