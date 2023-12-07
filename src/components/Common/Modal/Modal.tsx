@@ -14,6 +14,7 @@ import { useModalStore } from "@/store/useModalStore";
 import { Separator } from "@/components/ui/separator";
 import logo from "../../../../public/images/traders-edge-logo.png";
 import Image from "next/image";
+import LinkButton from "../Buttons/LinkButton";
 
 const Modal = () => {
   /* State */
@@ -21,14 +22,14 @@ const Modal = () => {
 
   // Data for each step
   const steps = [
-    {
+    /* {
       title: "Getting Started",
       content: [
         'Launch the conversion tool and select "Get Started."',
         "This step serves as an introduction to the conversion process.",
         "No specific action is required in this step; it is a brief overview to initiate the process.",
       ],
-    },
+    }, */
     {
       title: "Choose Your Broker",
       content: [
@@ -71,25 +72,30 @@ const Modal = () => {
         onOpenChange={() => setToggleModal(!toggleModal)}
       >
         <DialogContent className="bg-white ">
-          <DialogHeader className="  ">
+          <DialogHeader className=" w-11/12 mx-auto ">
             <div className=" w-full flex items-center justify-center my-2">
               <Image height={180} width={180} src={logo} alt="" />
             </div>
             <DialogTitle className="text-base text-center md:text-left md:text-lg mb-2  text-slate-500">
               Trade Import Utility Conversion Tool
             </DialogTitle>
-            <DialogDescription className="text-sm md:text-base text-left mb-4 ">
-              Welcome to the Trade Conversion Utility Tool – your solution for
-              effortlessly converting and importing trade data.
+            <DialogDescription className="text-sm md:text-base  text-center mb-4 ">
+              <span className="md:text-left block w-full">
+                Welcome to the Trade Conversion Utility Tool – Brought to you
+                by:{" "}
+                <LinkButton href="https://www.tradersedge.ca/" target="_blank">
+                  Traders Edge
+                </LinkButton>
+              </span>
             </DialogDescription>
           </DialogHeader>
           <Separator />
           <div className="max-h-96 overflow-y-scroll space-y-4 w-full ">
             {steps.map((step, index) => (
-              <DialogDescription className="w-10/12  " key={index}>
-                <strong className="text-base md:text-lg text-slate-500 ">{`${
-                  index > 0 ? `Step ${index}:` : ""
-                } ${step.title}`}</strong>
+              <div className="w-11/12 mx-auto text-slate-500" key={index}>
+                <strong className="text-base md:text-lg text-slate-500 ">{`${`Step ${
+                  index + 1
+                }:`} ${step.title}`}</strong>
                 <ul className="list-disc pl-6 space-y-1 mt-1">
                   {step.content.map((item, i) => (
                     <li key={i} className="text-sm md:text-base">
@@ -97,13 +103,16 @@ const Modal = () => {
                     </li>
                   ))}
                 </ul>
-              </DialogDescription>
+              </div>
             ))}
-
-            <DialogDescription className=" w-11/12  py-3 px-5 bg-slate-200 rounded-lg ">
+            <DialogDescription className=" w-11/12 mx-auto  py-3 px-5 bg-slate-200 rounded-lg ">
               <strong>Support:</strong> For any issues or questions, consult the
-              tool&apos;s documentation or reach out to our support team. Happy
-              trading!
+              tool&apos;s documentation or reach out to our support team. For
+              more details visit{" "}
+              <LinkButton href="https://www.tradersedge.ca/" target="_blank">
+                www.tradersedge.ca
+              </LinkButton>
+              .
             </DialogDescription>
           </div>
         </DialogContent>

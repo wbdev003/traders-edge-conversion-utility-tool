@@ -17,7 +17,7 @@ const ExitButton = ({ mode }: ExitButtonProps) => {
   const { setFileData, setFileDetails, setRejected } = useFileUploadStore();
 
   function onExitHandler() {
-    setFormStep(0);
+    setFormStep(1);
     setBrokerSelection("");
     setBrokerIndex(null);
     setFileData([]);

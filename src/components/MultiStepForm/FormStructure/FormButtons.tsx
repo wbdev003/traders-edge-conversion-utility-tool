@@ -18,7 +18,7 @@ const FormButtons = ({ condition, buttonTitle }: FormButtonsProps) => {
     <div
       className={`space-x-5 flex justify-center sm:justify-end items-center  mt-14`}
     >
-      {formStep > 0 ? (
+      {formStep > 1 ? (
         <Button
           variant={"outline"}
           className="flex m-0 w-fit p-0 px-2 pr-4  border-slate-300 "

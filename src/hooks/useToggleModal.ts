@@ -18,7 +18,7 @@ const useToggleModal = (): boolean => {
       localStorage.setItem("hasVisited", "true");
 
       // Set expiration time (1 hour from now)
-      const expirationTime = new Date().getTime() + 1 * 60 * 60 * 1000; // 1 hour in milliseconds
+      const expirationTime = new Date().getTime() + 30 * 60 * 1000; // Thirty minutes in milliseconds
       localStorage.setItem("expirationTime", expirationTime.toString());
     } else {
       // If visited, check if the expiration time has passed
