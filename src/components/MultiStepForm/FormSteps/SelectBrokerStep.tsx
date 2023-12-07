@@ -3,13 +3,14 @@ import scotiaItradeLogo from "../../../../public/images/scotia-itrade-logo.webp"
 import questtradeLogo from "../../../../public/images/questtrade-logo.png";
 import rbcLogo from "../../../../public/images/rbc-logo.png";
 import tdLogo from "../../../../public/images/td-logo.png";
+import ibLogo from "../../../../public/images/ib-logo.png";
 import { SelectOptionCard } from "@/components/Common/Cards/SelectOptionCard";
 
 const brokerData = [
-  { img: scotiaItradeLogo, title: "Scotia iTrade", identifier: "scotiabank" },
   { img: questtradeLogo, title: "Quest Trade", identifier: "questrade" },
   { img: tdLogo, title: "TD Direct Investing", identifier: "td" },
   { img: rbcLogo, title: "RBC Direct Investing", identifier: "rbc" },
+  { img: ibLogo, title: "Interactive Brokers", identifier: "ib" },
 ];
 const SelectBrokerStep = () => {
   return (

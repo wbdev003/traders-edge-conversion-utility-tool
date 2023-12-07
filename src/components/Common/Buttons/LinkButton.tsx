@@ -10,7 +10,11 @@ interface LinkButtonProps {
 
 const LinkButton = ({ href, children, target }: LinkButtonProps) => {
   return (
-    <Button asChild variant="link" className="p-0 m-0 text-md text-slate-600">
+    <Button
+      asChild
+      variant="link"
+      className="p-0 m-0 h-fit w-fit text-md text-slate-600"
+    >
       <Link
         className="p-0 m-0"
         href={href}

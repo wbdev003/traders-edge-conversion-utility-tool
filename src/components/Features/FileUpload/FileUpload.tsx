@@ -86,10 +86,10 @@ const FileUpload: React.FC<FileUploadProps> = ({ onFileDrop }) => {
   }, [fileData, brokerSelection]);
 
   return (
-    <form action="">
+    <form action="" className="">
       <div
         {...getRootProps()}
-        className="border-dashed border-2 border-slate-400 p-6 rounded-2xl text-center cursor-pointer max-w-xl mx-auto mt-5"
+        className="border-dashed border-2 border-slate-400 hover:bg-slate-200 p-6 rounded-2xl text-center cursor-pointer max-w-xl mx-auto mt-5"
       >
         <input {...getInputProps()} />
         <div
@@ -97,10 +97,13 @@ const FileUpload: React.FC<FileUploadProps> = ({ onFileDrop }) => {
           className="flex items-center justify-center flex-col w-full px-4 "
         >
           <input {...getInputProps()} />
-          <Icons type="upload" color="gray" size={70} />
-          <p className="text-2xl text-slate-700">Drag and drop</p>
+          <Icons type="upload" color="#334155" size={70} />
+          {/* <p className="text-2xl text-slate-700">Drag and drop</p>
           <p className="text-lg pt-2 text-slate-700 underline">OR</p>
-          <p className="text-slate-700 pt-2 text-lg">click to select file</p>
+          <p className="text-slate-700 pt-2 text-lg">click to select file</p> */}
+          <p className="text-slate-600 p-1 mt-1 text-xl font-semibold capitalize underline">
+            click to select file
+          </p>
         </div>
         {/* Display the uploaded and rejected files */}
         {(fileDetails.length > 0 || rejected.length > 0) && (

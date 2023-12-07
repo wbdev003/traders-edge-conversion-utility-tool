@@ -1,3 +1,4 @@
+"use client";
 import { useState, useEffect } from "react";
 import Papa, { UnparseObject } from "papaparse"; // Import UnparseObject from papaparse
 import Icons from "../Icons/Icons";

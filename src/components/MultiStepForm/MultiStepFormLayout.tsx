@@ -1,16 +1,17 @@
 "use client";
-import { useEffect } from "react";
-import { useSelectionStore } from "@/store/useSelectionStore";
-import FormStructure from "./FormStructure/FormStructure";
+import React from "react";
+import { Button } from "../ui/button";
 import { useFormStepStore } from "@/store/useFormStepStore";
+import { useSelectionStore } from "@/store/useSelectionStore";
+import Icons from "../Common/Icons/Icons";
+import DownloadCSVButton from "../Common/Buttons/DownloadCSVButton";
+import { useFileUploadStore } from "@/store/useFileUploadStore";
+import FormStructure from "./FormStructure/FormStructureLayout";
 import SelectBrokerStep from "./FormSteps/SelectBrokerStep";
 import UploadFileStep from "./FormSteps/UploadFileStep";
 import DisplayDataStep from "./FormSteps/DisplayDataStep";
-import { Button } from "../ui/button";
-import Icons from "../Common/Icons/Icons";
-import { useFileUploadStore } from "@/store/useFileUploadStore";
 import GetStartedStep from "./FormSteps/GetStartedStep";
-import FormButtons from "./FormStructure/FormButtons";
+import FormButtonsLayout from "./FormStructure/FormButtons/FormButtonsLayout";
 import useLeavePageWarning from "@/hooks/useLeavePageWarning";
 import SuccessStep from "./FormSteps/SuccessStep";
 import useToggleModal from "@/hooks/useToggleModal";
@@ -18,8 +19,12 @@ import useToggleModal from "@/hooks/useToggleModal";
 // Define an interface for form fields
 interface FormFields {
   title: string;
+  disabledCondition: boolean;
   description: string;
-  buttonTitle: string;
+  btn1Title?: string;
+  displayBtn1?: boolean;
+  btn2Title?: string;
+  displayBtn2?: boolean;
 }
 
 const MultiStepForm: React.FC = () => {
@@ -27,6 +32,7 @@ const MultiStepForm: React.FC = () => {
   const { brokerIndex } = useSelectionStore();
   const { formStep } = useFormStepStore();
   const { fileData, fileDetails } = useFileUploadStore();
+
   const toggleModal = useToggleModal();
 
   // Setting the initial state indicating whether changes are not saved
@@ -35,82 +41,107 @@ const MultiStepForm: React.FC = () => {
 
   // Define dynamic form fields based on formStep
   const formFields: Record<number, FormFields> = {
-    0: {
+    /* 0: {
       title: "Get Started",
       description: "Begin Conversion",
-      buttonTitle: "Get Started",
-    },
+      btn1Title: "Go Back",
+      displayBtn1: true,
+      btn2Title: "Get Started",
+      displayBtn2: true,
+    }, */
     1: {
-      title: "Choose Your Broker",
-      description: "Select Your Broker",
-      buttonTitle: "Next Step",
+      disabledCondition: brokerIndex === null,
+      title: "Get Started",
+      description: "Begin Conversion",
+      btn1Title: "Go Back",
+      displayBtn1: true,
+      btn2Title: "Get Started",
+      displayBtn2: true,
     },
     2: {
-      title: "Import Trade CSV File",
-      description: "Import Your Trade CSV File Here.",
-      buttonTitle: "Next Step",
+      disabledCondition: fileData.length === 0 && fileDetails.length === 0,
+      title: "Get Started",
+      description: "Begin Conversion",
+      btn1Title: "Go Back",
+      displayBtn1: true,
+      btn2Title: "Get Started",
+      displayBtn2: true,
     },
     3: {
-      title: "Review Your Trade Imports",
-      description: "Here are a list of your trades.",
-      buttonTitle: "Next Step",
+      disabledCondition: fileData.length === 0 && fileDetails.length === 0,
+      title: "Get Started",
+      description: "Begin Conversion",
+      btn1Title: "Go Back",
+      displayBtn1: true,
+      btn2Title: "Get Started",
+      displayBtn2: true,
     },
-    4: {
+    /* 4: {
       title: "Success",
       description:
         "Congratulations! Your trades have been successfully imported.",
       buttonTitle: "Next Step",
-    },
+    }, */
   };
 
   return (
     <FormStructure
       title={formFields[formStep].title}
       description={formFields[formStep].description}
-      buttonTitle={formFields[formStep].buttonTitle}
     >
       {/* {formStep === 0 && (
         <>
           <GetStartedStep />
-
-          <FormButtons
-            condition={false}
-            buttonTitle={formFields[formStep].buttonTitle}
+          <FormButtonsLayout
+            disabledCondition={formFields[formStep].disabledCondition}
+            btn1Title={formFields[formStep].btn1Title}
+            displayBtn1={formFields[formStep].displayBtn1}
+            btn2Title={formFields[formStep].btn2Title}
+            displayBtn2={formFields[formStep].displayBtn2}
           />
         </>
       )} */}
       {formStep === 1 && (
         <>
           <SelectBrokerStep />
-          <FormButtons
-            condition={brokerIndex === null}
-            buttonTitle={formFields[formStep].buttonTitle}
+          <FormButtonsLayout
+            disabledCondition={formFields[formStep].disabledCondition}
+            btn1Title={formFields[formStep].btn1Title}
+            displayBtn1={formFields[formStep].displayBtn1}
+            btn2Title={formFields[formStep].btn2Title}
+            displayBtn2={formFields[formStep].displayBtn2}
           />
         </>
       )}
       {formStep === 2 && (
         <>
           <UploadFileStep />
-          <FormButtons
-            condition={fileData.length === 0 && fileDetails.length === 0}
-            buttonTitle={formFields[formStep].buttonTitle}
+          <FormButtonsLayout
+            disabledCondition={formFields[formStep].disabledCondition}
+            btn1Title={formFields[formStep].btn1Title}
+            displayBtn1={formFields[formStep].displayBtn1}
+            btn2Title={formFields[formStep].btn2Title}
+            displayBtn2={formFields[formStep].displayBtn2}
           />
         </>
       )}
       {formStep === 3 && (
         <>
           <DisplayDataStep />
-          <FormButtons
-            condition={fileData.length === 0 && fileDetails.length === 0}
-            buttonTitle={formFields[formStep].buttonTitle}
+          <FormButtonsLayout
+            disabledCondition={formFields[formStep].disabledCondition}
+            btn1Title={formFields[formStep].btn1Title}
+            displayBtn1={formFields[formStep].displayBtn1}
+            btn2Title={formFields[formStep].btn2Title}
+            displayBtn2={formFields[formStep].displayBtn2}
           />
         </>
       )}
-      {formStep === 4 && (
+      {/* {formStep === 4 && (
         <>
           <SuccessStep />
         </>
-      )}
+      )} */}
     </FormStructure>
   );
 };
