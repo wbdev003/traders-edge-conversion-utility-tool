@@ -1,5 +1,5 @@
 "use client";
-import * as React from "react";
+import { useEffect } from "react";
 import { useSelectionStore } from "@/store/useSelectionStore";
 import FormStructure from "./FormStructure/FormStructure";
 import { useFormStepStore } from "@/store/useFormStepStore";
@@ -13,6 +13,7 @@ import GetStartedStep from "./FormSteps/GetStartedStep";
 import FormButtons from "./FormStructure/FormButtons";
 import useLeavePageWarning from "@/hooks/useLeavePageWarning";
 import SuccessStep from "./FormSteps/SuccessStep";
+import useToggleModal from "@/hooks/useToggleModal";
 
 // Define an interface for form fields
 interface FormFields {
@@ -26,6 +27,7 @@ const MultiStepForm: React.FC = () => {
   const { brokerIndex } = useSelectionStore();
   const { formStep } = useFormStepStore();
   const { fileData, fileDetails } = useFileUploadStore();
+  const toggleModal = useToggleModal();
 
   // Setting the initial state indicating whether changes are not saved
   const notSaved = true;
@@ -67,7 +69,7 @@ const MultiStepForm: React.FC = () => {
       description={formFields[formStep].description}
       buttonTitle={formFields[formStep].buttonTitle}
     >
-      {formStep === 0 && (
+      {/* {formStep === 0 && (
         <>
           <GetStartedStep />
 
@@ -76,7 +78,7 @@ const MultiStepForm: React.FC = () => {
             buttonTitle={formFields[formStep].buttonTitle}
           />
         </>
-      )}
+      )} */}
       {formStep === 1 && (
         <>
           <SelectBrokerStep />
