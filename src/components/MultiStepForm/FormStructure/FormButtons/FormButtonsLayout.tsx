@@ -3,6 +3,7 @@ import { Button } from "@/components/ui/button";
 import { useFormStepStore } from "@/store/useFormStepStore";
 import Icons from "@/components/Common/Icons/Icons";
 import DownloadCSVButton from "@/components/Common/Buttons/DownloadCSVButton";
+import { useFileUploadStore } from "@/store/useFileUploadStore";
 
 interface FormButtonsLayoutProps {
   disabledCondition: boolean;
@@ -22,6 +23,7 @@ const FormButtonsLayout = ({
 }: FormButtonsLayoutProps) => {
   /* State */
   const { formStep, setFormStep } = useFormStepStore();
+  const { processedData } = useFileUploadStore();
 
   return (
     <div
@@ -40,27 +42,34 @@ const FormButtonsLayout = ({
         </Button>
       )}
       {/* if Is disabled */}
-      {disabledCondition ? (
-        <Button
-          disabled
-          className="flex m-0 w-fit p-0 px-2 pl-5 bg-slate-700"
-          onClick={() => {
-            setFormStep(formStep + 1);
-          }}
-        >
-          <p>{btn2Title}</p>
-          <Icons type="next" size={25} color="white" />
-        </Button>
-      ) : (
-        <Button
-          className="flex m-0 w-fit p-0 px-2 pl-5 bg-slate-700"
-          onClick={() => {
-            setFormStep(formStep + 1);
-          }}
-        >
-          <p>{btn2Title}</p>
-          <Icons type="next" size={25} color="white" />
-        </Button>
+      {displayBtn2 &&
+        (disabledCondition ? (
+          <Button
+            disabled
+            className="flex m-0 w-fit p-0 px-2 pl-5 bg-slate-700"
+            onClick={() => {
+              setFormStep(formStep + 1);
+            }}
+          >
+            <p>{btn2Title}</p>
+            <Icons type="next" size={25} color="white" />
+          </Button>
+        ) : (
+          <Button
+            className="flex m-0 w-fit p-0 px-2 pl-5 bg-slate-700"
+            onClick={() => {
+              setFormStep(formStep + 1);
+            }}
+          >
+            <p>{btn2Title}</p>
+            <Icons type="next" size={25} color="white" />
+          </Button>
+        ))}
+      {!displayBtn2 && (
+        <DownloadCSVButton
+          data={processedData}
+          fileName="traders-edge-your-converted-trade-data"
+        />
       )}
     </div>
   );

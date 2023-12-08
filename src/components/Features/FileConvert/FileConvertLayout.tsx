@@ -3,7 +3,7 @@ import React, { useEffect, useState } from "react";
 import TableDisplay from "./TableDisplay/TableDisplay";
 import { Trade } from "@/models/clientModels";
 import { useFileUploadStore } from "@/store/useFileUploadStore";
-import { errorCase } from "@/helpers/helpers";
+import { errorCase } from "@/helpers/brokerHelpers/brokerhelpers";
 import { useSelectionStore } from "@/store/useSelectionStore";
 
 const FileConvertLayout = () => {

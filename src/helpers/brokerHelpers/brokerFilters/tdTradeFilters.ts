@@ -1,4 +1,4 @@
-import { mapToProperFormat } from "../helpers";
+import { mapToProperFormat } from "../brokerhelpers";
 
 /**
  * Filters data for TD type.

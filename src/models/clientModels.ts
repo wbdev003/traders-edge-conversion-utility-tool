@@ -11,3 +11,13 @@ export interface Trade {
   pricePerUnit: string;
   amount: string;
 }
+// Define an interface for form fields
+export interface FormFields {
+  title: string;
+  disabledCondition: boolean;
+  description: string;
+  btn1Title?: string;
+  displayBtn1?: boolean;
+  btn2Title?: string;
+  displayBtn2?: boolean;
+}
