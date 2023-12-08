@@ -1,5 +1,5 @@
 "use client";
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { Loader2 } from "lucide-react";
 import Papa from "papaparse"; // Import UnparseObject from papaparse
 import Icons from "../Icons/Icons";
@@ -7,10 +7,12 @@ import { Button } from "@/components/ui/button";
 import { useFormStepStore } from "@/store/useFormStepStore";
 import useResetForm from "@/hooks/useResetForm";
 
-const DownloadCSVButton: React.FC<{
+interface DownloadCSVButtonProps {
   data: boolean | string[][];
   fileName: string;
-}> = ({ data, fileName }) => {
+}
+
+const DownloadCSVButton = ({ data, fileName }: DownloadCSVButtonProps) => {
   const [csvData, setCSVData] = useState<string>("");
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const { setFormStep } = useFormStepStore();
@@ -50,11 +52,6 @@ const DownloadCSVButton: React.FC<{
     }, 1750);
   };
 
-  /*  useEffect(() => {
-    console.log("csvData", csvData);
-    console.log("data", data);
-  }, [data, csvData]);
- */
   return (
     <>
       {!isLoading ? (
