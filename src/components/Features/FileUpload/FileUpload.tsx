@@ -5,7 +5,7 @@ import Icons from "@/components/Common/Icons/Icons";
 import { FileRejection } from "react-dropzone";
 import { useToast } from "@/components/ui/use-toast";
 import { useFileUploadStore } from "@/store/useFileUploadStore";
-import { errorCase } from "@/helpers/brokerHelpers/brokerhelpers";
+import { errorCase } from "../../../../helpers/brokerHelpers/brokerhelpers";
 import Papa from "papaparse";
 import { useSelectionStore } from "@/store/useSelectionStore";
 
