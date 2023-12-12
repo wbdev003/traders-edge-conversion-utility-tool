@@ -30,30 +30,24 @@ const FileUpload: React.FC<FileUploadProps> = ({ onFileDrop }) => {
 
   /* Actions */
   const handleDrop = useCallback(
-    /**
-     * Callback function triggered when files are dropped or selected.
-     * @param {File[]} acceptedFiles - Array of accepted files.
-     * @param {FileRejection[]} rejectedFiles - Array of rejected files.
-     */
-    (acceptedFiles: File[], rejectedFiles: FileRejection[]) => {
+    async (acceptedFiles: File[], rejectedFiles: FileRejection[]) => {
       // Allow only one file
       const csvFile = acceptedFiles[0];
 
-      // Filter out rejected files that are not CSV
       if (csvFile && csvFile.name.toLowerCase().endsWith(".csv")) {
         // Parse CSV using Papa.parse library
         Papa.parse(csvFile, {
           complete: function (results) {
-            // Set the parsed CSV data to the component state
             setFileData(results.data);
+
+            // Send the parsed CSV data to the backend API
+            sendToBackend(fileData);
           },
         });
 
-        // Set file details for display or further processing
         setFileDetails([csvFile]);
-
-        // Clear the rejected files array and trigger onFileDrop callback
         setRejected([]);
+
         if (onFileDrop) {
           onFileDrop([csvFile]);
         }
@@ -62,7 +56,6 @@ const FileUpload: React.FC<FileUploadProps> = ({ onFileDrop }) => {
         setFileData([]);
         setRejected(rejectedFiles);
 
-        // Show a toast notification for an invalid file
         toast({
           variant: "destructive",
           title: "Invalid File",
@@ -70,9 +63,32 @@ const FileUpload: React.FC<FileUploadProps> = ({ onFileDrop }) => {
         });
       }
     },
-    // Dependencies for useCallback to avoid unnecessary re-renders
-    [onFileDrop, toast, setFileData, setRejected, setFileDetails]
+    [onFileDrop, toast, setFileData, setRejected, setFileDetails, fileData]
   );
+
+  const sendToBackend = async (parsedData: FormData[] | unknown[]) => {
+    try {
+      const formData = new FormData();
+      formData.append("parsedData", JSON.stringify(parsedData));
+
+      const response = await fetch("./api/convert", {
+        method: "POST",
+        body: formData,
+      });
+
+      if (response.ok) {
+        const responseData = await response.json();
+        console.log("Backend response:", responseData);
+        // Handle the response from the backend as needed
+      } else {
+        console.error("Error in backend response:", response.statusText);
+        // Handle the error in the backend response
+      }
+    } catch (error) {
+      console.error("Error sending data to backend:", error);
+      // Handle other errors (e.g., network issues)
+    }
+  };
 
   const { getRootProps, getInputProps, isDragActive }: DropzoneRootProps =
     useDropzone({
