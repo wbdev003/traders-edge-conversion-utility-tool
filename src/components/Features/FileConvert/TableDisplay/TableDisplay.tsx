@@ -45,10 +45,11 @@ const FileConvertTableDisplay = ({ data }: FileConvertTableDisplayProps) => {
             {/* Map through cell data to create formatted TableCell components */}
             {rowData.map((cellData, cellIndex) => (
               <TableCell key={cellIndex}>
-                {cellIndex === 0 ||
-                cellIndex === 1 ||
-                cellIndex === 2 ||
-                cellIndex === 9
+                {cellIndex === 0 || cellIndex === 1
+                  ? standardizeDate(cellData)
+                  : cellIndex === 2
+                  ? standardizeDate(cellData)
+                  : cellIndex === 9
                   ? cellData
                   : formatNumber(cellData)}
               </TableCell>
@@ -83,9 +84,11 @@ const FileConvertTableDisplay = ({ data }: FileConvertTableDisplayProps) => {
     </Table>
   );
 };
+// Export the FileConvertTableDisplay component
+export default FileConvertTableDisplay;
 
 // Helper function to format numbers with commas
-const formatNumber = (value: string): string => {
+export const formatNumber = (value: string): string => {
   const parsedValue = parseFloat(value);
   if (!isNaN(parsedValue)) {
     return parsedValue.toLocaleString("en-US", {
@@ -96,5 +99,21 @@ const formatNumber = (value: string): string => {
   return value;
 };
 
-// Export the FileConvertTableDisplay component
-export default FileConvertTableDisplay;
+// Helper function to standardize date formats
+export const standardizeDate = (dateString: string): string => {
+  // Check if the date is in the "YYYY-MM-DD" format
+  const isISODate = /^\d{4}-\d{2}-\d{2}$/.test(dateString);
+
+  if (isISODate) {
+    // If it's already in ISO format, return as is
+    return dateString;
+  } else {
+    // Assuming the date is in "MM/DD/YY" format, convert it to "YYYY-MM-DD"
+    const [month, day, year] = dateString.split("/");
+    const isoDate = `20${year}-${month.padStart(2, "0")}-${day?.padStart(
+      2,
+      "0"
+    )}`;
+    return isoDate;
+  }
+};

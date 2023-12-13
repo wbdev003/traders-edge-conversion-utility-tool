@@ -143,7 +143,6 @@ export function errorCase(
     ) {
       return rbcTradeFilter(args);
     } else {
-      console.log(123); // triggers
       return false;
     }
   } else {
