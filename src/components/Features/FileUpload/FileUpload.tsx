@@ -83,7 +83,7 @@ const FileUpload: React.FC<FileUploadProps> = ({ onFileDrop }) => {
         <div className="flex items-center justify-center flex-col w-full px-4 ">
           <Icons type="upload" color="#334155" size={70} />
 
-          <p className="text-slate-600 p-1 mt-1 text-xl font-semibold capitalize underline">
+          <p className="text-slate-600 p-1 mt-1 text-xl font-semibold capitalize underline ">
             click to select file
           </p>
         </div>
@@ -91,7 +91,7 @@ const FileUpload: React.FC<FileUploadProps> = ({ onFileDrop }) => {
         {(fileDetails.length > 0 || rejected.length > 0) && (
           <div className="p-2 mt-2 rounded-2xl bg-slate-300">
             {fileDetails.length > 0 && (
-              <div>
+              <div className="truncate">
                 <p className="text-xl font-bold">Uploaded File:</p>
                 <ul>
                   {fileDetails.map((file, index) => (
