@@ -67,7 +67,10 @@ const FileUpload: React.FC<FileUploadProps> = ({ onFileDrop }) => {
       onDrop: handleDrop,
       accept: { file: [".csv"] }, // Specify accepted file types
       maxFiles: 1, // Allow only one file
+      noClick: true,
     });
+
+  const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
 
   return (
     <form action="" className="">
@@ -82,9 +85,7 @@ const FileUpload: React.FC<FileUploadProps> = ({ onFileDrop }) => {
         >
           <input {...getInputProps()} />
           <Icons type="upload" color="#334155" size={70} />
-          {/* <p className="text-2xl text-slate-700">Drag and drop</p>
-          <p className="text-lg pt-2 text-slate-700 underline">OR</p>
-          <p className="text-slate-700 pt-2 text-lg">click to select file</p> */}
+
           <p className="text-slate-600 p-1 mt-1 text-xl font-semibold capitalize underline">
             click to select file
           </p>
