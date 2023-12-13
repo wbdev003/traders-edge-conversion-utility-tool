@@ -1,20 +1,10 @@
 "use client";
-import React, { useEffect, useState } from "react";
+import React from "react";
 import TableDisplay from "./TableDisplay/TableDisplay";
-import { Trade } from "@/models/clientModels";
 import { useFileUploadStore } from "@/store/useFileUploadStore";
-import { errorCase } from "../../../../helpers/brokerHelpers/brokerhelpers";
-import { useSelectionStore } from "@/store/useSelectionStore";
 
 const FileConvertLayout = () => {
-  const { fileData, processedData, setProcessedData } = useFileUploadStore();
-  const { brokerSelection } = useSelectionStore();
-
-  useEffect(() => {
-    let res = errorCase(fileData, brokerSelection);
-    setProcessedData(res);
-    console.log(res);
-  }, [fileData, brokerSelection, setProcessedData]);
+  const { processedData } = useFileUploadStore();
 
   return (
     <div>

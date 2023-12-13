@@ -1,35 +1,62 @@
-import { NextApiRequest, NextApiResponse } from "next";
-import { NextResponse } from "next/server";
-import { errorCase } from "@/helpers/brokerHelpers/brokerhelpers";
-export async function POST(req: NextApiRequest, res: NextApiResponse) {
+import { NextResponse, NextRequest } from "next/server";
+import { errorCasePromise } from "@/helpers/brokerHelpers/brokerhelpers";
+
+export async function POST(req: NextRequest, res: NextResponse) {
   try {
-    // Access the CSV file from the request body
-    const csvData = req.body.parsedData;
+    // Process Body
+    const body = await req.json();
 
-    // Replace 'questrade' with the actual broker selection logic
-    const selectedBroker = "questrade";
+    if (body) {
+      // Access the CSV file from the request body
+      let csvData = body.csvData;
+      // Access the selected broker from request body
+      let selectedBroker = body.selectedBroker;
+      /* return NextResponse.json({ s: csvData }); */
 
-    // Check for error cases and perform CSV conversion
-    const result = errorCase(csvData, selectedBroker);
+      // Check for error cases and perform CSV conversion
+      const result = await errorCasePromise(csvData, selectedBroker);
 
-    if (result) {
-      // If errorCase returns a valid result, it means there are no errors
-      // Perform the CSV conversion based on your specific logic
+      if (result) {
+        // If errorCase returns a valid result, it means there are no errors
+        // Perform the CSV conversion based on your specific logic
 
-      // Return the converted data to the client
-      res.status(200).json({ data: csvData });
+        // Return the converted data to the client
+        return NextResponse.json(result);
+      } else {
+        // If errorCase returns false, there are errors in the CSV
+        return NextResponse.json(
+          {
+            error: "Invalid CSV format for the selected broker.",
+          },
+          { status: 400 }
+        );
+      }
     } else {
-      // If errorCase returns false, there are errors in the CSV
-      res
-        .status(400)
-        .json({ error: "Invalid CSV format for the selected broker." });
+      // Handle the case when the body is empty
+      return NextResponse.json(
+        {
+          error: "Invalid request body.",
+        },
+        { status: 400 }
+      );
     }
   } catch (error) {
     console.error(error);
-    res.status(500).json({ error: "Internal Server Error" });
+    return NextResponse.json(
+      { error: "Internal Server Error" },
+      { status: 500 }
+    );
   }
 }
 
 export async function GET() {
-  NextResponse.json({ "123": 123 });
+  try {
+    return NextResponse.json({
+      Welcome: "Welcome to Trader's Edge - Trade Conversion Utility Tool",
+    });
+  } catch (error) {
+    return NextResponse.json({
+      error: "Invalid CSV format for the selected broker.",
+    });
+  }
 }

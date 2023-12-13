@@ -152,3 +152,83 @@ export function errorCase(
     return false;
   }
 }
+
+/**
+ * Checks for error cases based on the selected type.
+ * @param {any} args - Data array to check for errors.
+ * @returns {Promise<boolean | string[][]>} - False if an error is detected, true otherwise.
+ */
+export async function errorCasePromise(
+  args: any,
+  selectedBroker: string
+): Promise<boolean | string[][]> {
+  // ... your existing code
+
+  // Questrade
+  if (selectedBroker === "questrade") {
+    if (
+      checkArrayEqual(args[0], [
+        "Transaction Date",
+        "Settlement Date",
+        "Action",
+        "Symbol",
+        "Description",
+        "Quantity",
+        "Price",
+        "Gross Amount",
+        "Commission",
+        "Net Amount",
+        "Currency",
+        "Account #",
+        "Activity Type",
+        "Account Type",
+      ])
+    ) {
+      return questTradeFilter(args);
+    } else {
+      return false;
+    }
+    /* TD */
+  } else if (selectedBroker === "td") {
+    if (
+      checkArrayEqual(args[3], [
+        "Trade Date",
+        "Settle Date",
+        "Description",
+        "Action",
+        "Quantity",
+        "Price",
+        "Commission",
+        "Net Amount",
+      ])
+    ) {
+      return tdTradeFilter(args);
+    } else {
+      return false;
+    }
+    /* RBC */
+  } else if (selectedBroker === "rbc") {
+    if (
+      checkArrayEqual(args[8], [
+        "Date",
+        "Activity",
+        "Symbol",
+        "Symbol Description",
+        "Quantity",
+        "Price",
+        "Settlement Date",
+        "Account",
+        "Value",
+        "Currency",
+        "Description",
+      ])
+    ) {
+      return rbcTradeFilter(args);
+    } else {
+      return false;
+    }
+  } else {
+    console.log("not equal");
+    return false;
+  }
+}

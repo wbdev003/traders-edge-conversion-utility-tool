@@ -5,7 +5,6 @@ import Icons from "@/components/Common/Icons/Icons";
 import { FileRejection } from "react-dropzone";
 import { useToast } from "@/components/ui/use-toast";
 import { useFileUploadStore } from "@/store/useFileUploadStore";
-import { errorCase } from "../../../../helpers/brokerHelpers/brokerhelpers";
 import Papa from "papaparse";
 import { useSelectionStore } from "@/store/useSelectionStore";
 
@@ -39,9 +38,6 @@ const FileUpload: React.FC<FileUploadProps> = ({ onFileDrop }) => {
         Papa.parse(csvFile, {
           complete: function (results) {
             setFileData(results.data);
-
-            // Send the parsed CSV data to the backend API
-            sendToBackend(fileData);
           },
         });
 
@@ -63,32 +59,8 @@ const FileUpload: React.FC<FileUploadProps> = ({ onFileDrop }) => {
         });
       }
     },
-    [onFileDrop, toast, setFileData, setRejected, setFileDetails, fileData]
+    [onFileDrop, toast, setFileData, setRejected, setFileDetails]
   );
-
-  const sendToBackend = async (parsedData: FormData[] | unknown[]) => {
-    try {
-      const formData = new FormData();
-      formData.append("parsedData", JSON.stringify(parsedData));
-
-      const response = await fetch("./api/convert", {
-        method: "POST",
-        body: formData,
-      });
-
-      if (response.ok) {
-        const responseData = await response.json();
-        console.log("Backend response:", responseData);
-        // Handle the response from the backend as needed
-      } else {
-        console.error("Error in backend response:", response.statusText);
-        // Handle the error in the backend response
-      }
-    } catch (error) {
-      console.error("Error sending data to backend:", error);
-      // Handle other errors (e.g., network issues)
-    }
-  };
 
   const { getRootProps, getInputProps, isDragActive }: DropzoneRootProps =
     useDropzone({
@@ -96,10 +68,6 @@ const FileUpload: React.FC<FileUploadProps> = ({ onFileDrop }) => {
       accept: { file: [".csv"] }, // Specify accepted file types
       maxFiles: 1, // Allow only one file
     });
-
-  useEffect(() => {
-    console.log(fileData);
-  }, [fileData, brokerSelection]);
 
   return (
     <form action="" className="">

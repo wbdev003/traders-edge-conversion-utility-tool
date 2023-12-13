@@ -11,20 +11,23 @@ import FormButtonsLayout from "./FormStructure/FormButtons/FormButtonsLayout";
 import useLeavePageWarning from "@/hooks/useLeavePageWarning";
 import useToggleModal from "@/hooks/useToggleModal";
 import { FormFields } from "@/models/clientModels";
+import { convertTradeData } from "@/helpers/apiClient/apiClient";
+import { useLoadingStore } from "@/store/useLoadingStore";
+import LoadingSkeleton from "./FormSteps/Loading/LoadingSkeleton";
+import { useToast } from "../ui/use-toast";
 
 const MultiStepForm: React.FC = () => {
-  /* State */
-  const { brokerIndex } = useSelectionStore();
-  const { formStep } = useFormStepStore();
-  const { fileData, fileDetails } = useFileUploadStore();
-
+  const { brokerIndex, brokerSelection } = useSelectionStore();
+  const { formStep, setFormStep } = useFormStepStore();
+  const { fileData, fileDetails, setProcessedData } = useFileUploadStore();
+  const { loading, setLoading } = useLoadingStore();
   const toggleModal = useToggleModal();
 
-  // Setting the initial state indicating whether changes are not saved
   const notSaved = true;
-  useLeavePageWarning(notSaved); // handle leave page warning based on the notSaved state
+  useLeavePageWarning(notSaved);
+  /* Display toast notifications. */
+  const { toast } = useToast();
 
-  // Form Fields
   const formFields: Record<number, FormFields> = {
     1: {
       disabledCondition: brokerIndex === null,
@@ -34,15 +37,42 @@ const MultiStepForm: React.FC = () => {
       displayBtn1: false,
       btn2Title: "Next Step",
       displayBtn2: true,
+      btn1Function: () => setFormStep(formStep - 1),
+      btn2Function: () => setFormStep(formStep + 1),
     },
     2: {
-      disabledCondition: fileData.length === 0 && fileDetails.length === 0,
+      disabledCondition: fileData?.length === 0 && fileDetails?.length === 0,
       title: "Import Your Trades",
       description: "Upload Your Trade Data",
       btn1Title: "Go Back",
       displayBtn1: true,
       btn2Title: "Upload",
       displayBtn2: true,
+      btn1Function: () => setFormStep(formStep - 1),
+      btn2Function: async () => {
+        try {
+          setLoading(true);
+
+          // Assuming convertTradeData returns a Promise
+          let data = await convertTradeData(fileData, brokerSelection);
+          setProcessedData(data);
+
+          // Wait for the data processing to complete before moving to the next step
+          setFormStep(formStep + 1);
+        } catch (error) {
+          console.error("Error processing data:", error);
+          toast({
+            variant: "destructive",
+            title: "Error",
+            description: "Error Uploading CSV file, Please Try Again.",
+          });
+        } finally {
+          // Set loading to false after a delay x amound of milliseconds
+          setTimeout(() => {
+            setLoading(false);
+          }, 1200);
+        }
+      },
     },
     3: {
       disabledCondition: fileData.length === 0 && fileDetails.length === 0,
@@ -52,6 +82,8 @@ const MultiStepForm: React.FC = () => {
       displayBtn1: true,
       btn2Title: "Download CSV",
       displayBtn2: false,
+      btn1Function: () => setFormStep(formStep - 1),
+      btn2Function: () => {},
     },
   };
 
@@ -63,37 +95,28 @@ const MultiStepForm: React.FC = () => {
       {formStep === 1 && (
         <>
           <SelectBrokerStep />
-          <FormButtonsLayout
-            disabledCondition={formFields[formStep].disabledCondition}
-            btn1Title={formFields[formStep].btn1Title}
-            displayBtn1={formFields[formStep].displayBtn1}
-            btn2Title={formFields[formStep].btn2Title}
-            displayBtn2={formFields[formStep].displayBtn2}
-          />
+          <FormButtonsLayout {...formFields[formStep]} />
         </>
       )}
       {formStep === 2 && (
         <>
-          <UploadFileStep />
-          <FormButtonsLayout
-            disabledCondition={formFields[formStep].disabledCondition}
-            btn1Title={formFields[formStep].btn1Title}
-            displayBtn1={formFields[formStep].displayBtn1}
-            btn2Title={formFields[formStep].btn2Title}
-            displayBtn2={formFields[formStep].displayBtn2}
-          />
+          {loading ? (
+            <>
+              <LoadingSkeleton />
+              <FormButtonsLayout {...formFields[formStep]} />
+            </>
+          ) : (
+            <>
+              <UploadFileStep />
+              <FormButtonsLayout {...formFields[formStep]} />
+            </>
+          )}
         </>
       )}
       {formStep === 3 && (
         <>
           <DisplayDataStep />
-          <FormButtonsLayout
-            disabledCondition={formFields[formStep].disabledCondition}
-            btn1Title={formFields[formStep].btn1Title}
-            displayBtn1={formFields[formStep].displayBtn1}
-            btn2Title={formFields[formStep].btn2Title}
-            displayBtn2={formFields[formStep].displayBtn2}
-          />
+          <FormButtonsLayout {...formFields[formStep]} />
         </>
       )}
     </FormStructure>

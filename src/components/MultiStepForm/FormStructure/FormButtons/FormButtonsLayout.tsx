@@ -10,8 +10,10 @@ interface FormButtonsLayoutProps {
   formstep?: number;
   btn1Title?: string; // New button 1 title
   displayBtn1?: boolean; // New button 1 display condition
+  btn1Function: () => void;
   btn2Title?: string; // New button 2 title
   displayBtn2?: boolean; // New button 2 display condition
+  btn2Function: () => void;
 }
 
 const FormButtonsLayout = ({
@@ -20,9 +22,11 @@ const FormButtonsLayout = ({
   displayBtn1,
   btn2Title,
   displayBtn2,
+  btn1Function,
+  btn2Function,
 }: FormButtonsLayoutProps) => {
   /* State */
-  const { formStep, setFormStep } = useFormStepStore();
+  const { formStep } = useFormStepStore();
   const { processedData } = useFileUploadStore();
 
   return (
@@ -34,7 +38,7 @@ const FormButtonsLayout = ({
           variant={"outline"}
           className="flex m-0 w-fit p-0 px-2 pr-4 border-slate-300"
           onClick={() => {
-            setFormStep(formStep - 1);
+            btn1Function();
           }}
         >
           <Icons type="back" size={20} color="#334155" />
@@ -48,7 +52,7 @@ const FormButtonsLayout = ({
             disabled
             className="flex m-0 w-fit p-0 px-2 pl-5 bg-slate-700"
             onClick={() => {
-              setFormStep(formStep + 1);
+              btn2Function();
             }}
           >
             <p>{btn2Title}</p>
@@ -58,7 +62,7 @@ const FormButtonsLayout = ({
           <Button
             className="flex m-0 w-fit p-0 px-2 pl-5 bg-slate-700"
             onClick={() => {
-              setFormStep(formStep + 1);
+              btn2Function();
             }}
           >
             <p>{btn2Title}</p>

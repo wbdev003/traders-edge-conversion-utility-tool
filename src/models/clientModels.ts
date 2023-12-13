@@ -18,6 +18,8 @@ export interface FormFields {
   description: string;
   btn1Title?: string;
   displayBtn1?: boolean;
+  btn1Function: () => void;
   btn2Title?: string;
   displayBtn2?: boolean;
+  btn2Function: () => void;
 }
