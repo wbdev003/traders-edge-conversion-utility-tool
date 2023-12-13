@@ -1,5 +1,5 @@
 "use client";
-import React, { useCallback, useState } from "react";
+import React, { useCallback, useState, useEffect } from "react";
 import { useDropzone, DropzoneRootProps } from "react-dropzone";
 import Icons from "@/components/Common/Icons/Icons";
 import { FileRejection } from "react-dropzone";
@@ -69,22 +69,24 @@ const FileUpload: React.FC<FileUploadProps> = ({ onFileDrop }) => {
       maxFiles: 1, // Allow only one file
     });
 
-  // Check if the device is mobile
   const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
 
   return (
     <form action="" className="">
       <div
         {...getRootProps()}
-        className={`border-dashed border-2 border-slate-400 hover:bg-slate-200 p-6 rounded-2xl text-center cursor-pointer max-w-xl mx-auto mt-5 ${
-          isDragActive ? "bg-slate-200" : ""
-        } ${isMobile ? "pointer-events-none" : ""}`}
+        className="border-dashed border-2 border-slate-400 hover:bg-slate-200 p-6 rounded-2xl text-center cursor-pointer max-w-xl mx-auto mt-5"
       >
         <input {...getInputProps()} />
-        <div className="flex items-center justify-center flex-col w-full px-4">
+        <div
+          {...getRootProps()}
+          className="flex items-center justify-center flex-col w-full px-4 "
+        >
+          <input {...getInputProps()} />
           <Icons type="upload" color="#334155" size={70} />
+
           <p className="text-slate-600 p-1 mt-1 text-xl font-semibold capitalize underline">
-            {isDragActive ? "Drop the file here" : "Click to select file"}
+            click to select file
           </p>
         </div>
         {/* Display the uploaded and rejected files */}
