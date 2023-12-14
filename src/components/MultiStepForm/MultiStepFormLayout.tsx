@@ -1,5 +1,5 @@
 "use client";
-import React from "react";
+import React, { useEffect } from "react";
 import { useFormStepStore } from "@/store/useFormStepStore";
 import { useSelectionStore } from "@/store/useSelectionStore";
 import { useFileUploadStore } from "@/store/useFileUploadStore";
@@ -19,7 +19,8 @@ import { useToast } from "../ui/use-toast";
 const MultiStepForm: React.FC = () => {
   const { brokerIndex, brokerSelection } = useSelectionStore();
   const { formStep, setFormStep } = useFormStepStore();
-  const { fileData, fileDetails, setProcessedData } = useFileUploadStore();
+  const { fileData, fileDetails, setProcessedData, processedData } =
+    useFileUploadStore();
   const { loading, setLoading } = useLoadingStore();
   const toggleModal = useToggleModal();
 
@@ -86,6 +87,10 @@ const MultiStepForm: React.FC = () => {
       btn2Function: () => {},
     },
   };
+
+  useEffect(() => {
+    console.log(fileData);
+  }, [fileData]);
 
   return (
     <FormStructure

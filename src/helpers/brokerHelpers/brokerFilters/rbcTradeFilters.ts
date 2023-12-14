@@ -27,7 +27,7 @@ import { mapToProperFormat } from "../brokerhelpers";
       temp.push(data[i][j]);
     }
 
-    temp.push(parseFloat(trueValue.split('"')[1]));
+    temp.push(parseFloat(trueValue.replace(/,/g, "")));
 
     for (let j = stopAt; j < stopAt + 2; j++) {
       temp.push(data[i][j]);
@@ -75,10 +75,19 @@ import { mapToProperFormat } from "../brokerhelpers";
       } else if (j === 4) {
         temp.push(Math.abs(data[i][j]));
       } else if (j === 5) {
-        if (data[i][4]) {
-          temp.push((Math.abs(data[i][8]) / Math.abs(data[i][4])).toFixed(4));
+        const numerator = Math.abs(parseFloat(data[i][5]));
+        const denominator = Math.abs(parseFloat(data[i][4]));
+        if (data[i][4] && data[i][5]) {
+          /* console.log("123", data[i][8], data[i][4]); */
+          if (!isNaN(numerator) && !isNaN(denominator) && denominator !== 0) {
+            temp.push((numerator / denominator).toFixed(4));
+          } else {
+            // Handle the case where division is not possible (e.g., denominator is 0)
+            temp.push("N/A");
+          }
         } else {
-          temp.push(0);
+          // Handle the case where either data[i][4] or data[i][8] is undefined or falsy
+          temp.push("N/A");
         }
       } else if (j === 6) {
         let date: Date = new Date(data[i][j]);
@@ -93,7 +102,7 @@ import { mapToProperFormat } from "../brokerhelpers";
       } else if (j === 7) {
         temp.push(data[i][j] + data[i][9]);
       } else if (j === 8) {
-        temp.push(Math.abs(data[i][j]));
+        temp.push(data[i][j]);
       } else {
         temp.push(data[i][j]);
       }
