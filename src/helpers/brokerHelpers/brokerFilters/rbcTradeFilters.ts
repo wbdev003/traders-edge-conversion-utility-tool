@@ -102,7 +102,7 @@ import { mapToProperFormat } from "../brokerhelpers";
       } else if (j === 7) {
         temp.push(data[i][j] + data[i][9]);
       } else if (j === 8) {
-        temp.push(data[i][j]);
+        temp.push(Math.abs(data[i][j]));
       } else {
         temp.push(data[i][j]);
       }
