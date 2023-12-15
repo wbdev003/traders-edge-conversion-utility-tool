@@ -18,8 +18,19 @@ export function tdTradeFilter(data: any): Array<Array<string>> {
     let date, month, day, year;
 
     for (let j = 0; j < data[i].length; j++) {
-      // looks through every column by index and changes it based on requirements
+      // looks through every column by index and changes it based on requirementsif (j === 3) {
       if (j === 3) {
+        if (data[i][j] === "SELL") {
+          temp.push("Sell");
+          temp.push(data[i][j]);
+        } else if (data[i][j] === "BUY") {
+          temp.push("Buy");
+          temp.push(data[i][j]);
+        } else {
+          temp.push("Unallocated");
+          temp.push(data[i][j]);
+        }
+      } else if (j === 3) {
         if (data[i][j] === "SELL") {
           temp.push("sell");
           temp.push(data[i][j]);
@@ -40,15 +51,24 @@ export function tdTradeFilter(data: any): Array<Array<string>> {
       } else if (j === 4) {
         temp.push(Math.abs(data[i][j]));
       } else if (j === 5) {
+        /* if (data[i][4] === 0) {
+          temp.push(0);
+        } else {
+          const pricePerQuantity = Math.abs(data[i][5]) / Math.abs(data[i][4]);
+          temp.push(pricePerQuantity.toFixed(8));
+        } */
         if (data[i][4] === 0) {
           temp.push(0);
         } else {
-          temp.push((Math.abs(data[i][7]) / Math.abs(data[i][4])).toFixed(4));
+          const pricePerQuantity = Math.abs(data[i][5]);
+          temp.push(pricePerQuantity.toFixed(2));
         }
       } else if (j === 6) {
         temp.push(data[i][j] ? parseInt(data[i][j]) : 0);
       } else if (j === 7) {
         temp.push(Math.abs(data[i][j]));
+      } else if (j === 9) {
+        temp.push(data[i][j]);
       } else {
         temp.push(data[i][j]);
       }
@@ -70,7 +90,11 @@ export function tdTradeFilter(data: any): Array<Array<string>> {
     11: 3,
     10: 4,
     12: 5,
-    4: 6,
+    3: 6,
+    4: 7,
+    5: 8,
+    6: 9,
+    8: 10,
   });
 }
 
