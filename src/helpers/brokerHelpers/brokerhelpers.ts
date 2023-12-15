@@ -1,6 +1,7 @@
 import { tdTradeFilter } from "./brokerFilters/tdTradeFilters";
 import { questTradeFilter } from "./brokerFilters/questTradeFilters";
 import { rbcTradeFilter } from "./brokerFilters/rbcTradeFilters";
+import { ibkrTradeFilter } from "./brokerFilters/ibkrTradeFilters";
 
 // Define a variable to hold the selected type (questrade, TD, RBC)
 export const header = [
@@ -223,6 +224,26 @@ export async function errorCasePromise(
       ])
     ) {
       return rbcTradeFilter(args);
+    } else {
+      return false;
+    }
+  } else if (selectedBroker === "ibkr") {
+    if (
+      checkArrayEqual(args[8], [
+        "Date",
+        "Activity",
+        "Symbol",
+        "Symbol Description",
+        "Quantity",
+        "Price",
+        "Settlement Date",
+        "Account",
+        "Value",
+        "Currency",
+        "Description",
+      ])
+    ) {
+      return ibkrTradeFilter(args);
     } else {
       return false;
     }
