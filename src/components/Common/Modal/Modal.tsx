@@ -34,8 +34,8 @@ const Modal = () => {
       title: "Choose Your Broker",
       content: [
         'Click on "Choose Your Broker" to specify the trading platform or broker from which you are importing data.',
-        "Provide any necessary credentials or authentication details to access your trade information securely.",
-        "This step ensures accurate data extraction tailored to your specific broker.",
+        /*         "Provide any necessary credentials or authentication details to access your trade information securely.",
+         */ "This step ensures accurate data extraction tailored to your specific broker.",
       ],
     },
     {
@@ -51,7 +51,7 @@ const Modal = () => {
       content: [
         'After the file is processed, navigate to "Your Trade Imports" to review a comprehensive list of your trades.',
         "Verify the accuracy of the imported data, including trade details, timestamps, and any associated information.",
-        "If needed, make adjustments or corrections before proceeding to the final step.",
+        "If needed, make adjustments or corrections.",
       ],
     },
     /* {
@@ -71,7 +71,7 @@ const Modal = () => {
         defaultOpen={toggleModal}
         onOpenChange={() => setToggleModal(!toggleModal)}
       >
-        <DialogContent className="bg-white p-2">
+        <DialogContent className="bg-white p-6">
           <DialogHeader className=" w-11/12 mx-auto ">
             <div className=" w-full flex items-center justify-center my-2">
               <Image height={180} width={180} src={logo} alt="" />
