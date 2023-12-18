@@ -125,6 +125,6 @@ import { mapToProperFormat } from "../brokerhelpers";
     2: 7,
     5: 8,
     6: 9,
-    4: 10,
+    9: 10,
   });
 }

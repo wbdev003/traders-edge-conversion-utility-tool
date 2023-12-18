@@ -4,8 +4,9 @@ export async function convertTradeData(
   csvData: unknown[],
   selectedBroker: string
 ) {
-  /* https://trade-conversion-utility-tool.vercel.app/ */
-  const apiUrl = "https://trade-conversion-utility-tool.vercel.app/api/convert"; // Replace with your actual backend API URL
+  // https://trade-conversion-utility-tool.vercel.app/
+  // http://localhost:3000/
+  const apiUrl = "https://trade-conversion-utility-tool.vercel.app/"; // Replace with your actual backend API URL
 
   try {
     const response = await fetch(apiUrl, {

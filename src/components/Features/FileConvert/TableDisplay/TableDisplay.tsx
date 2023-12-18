@@ -59,15 +59,14 @@ const FileConvertTableDisplay = ({ data }: FileConvertTableDisplayProps) => {
       </TableBody>
 
       {/* Table Footer */}
-      <TableFooter>
+      {/* Table Footer for calculateing the total amount */}
+      {/*  <TableFooter>
         <TableRow>
-          {/* Display a bold TableCell spanning the entire header length - 1 */}
           <TableCell colSpan={header.length - 1} className="font-bold">
             Total
           </TableCell>
-          {/* Calculate the total amount dynamically based on the last index of the inputted data */}
           <TableCell className="font-bold">
-            {/* Use reduce to sum up the amounts from the last column of each row */}
+      
             $
             {formatNumber(
               rows
@@ -80,7 +79,7 @@ const FileConvertTableDisplay = ({ data }: FileConvertTableDisplayProps) => {
             )}
           </TableCell>
         </TableRow>
-      </TableFooter>
+      </TableFooter> */}
     </Table>
   );
 };
