@@ -71,7 +71,7 @@ const Modal = () => {
         defaultOpen={toggleModal}
         onOpenChange={() => setToggleModal(!toggleModal)}
       >
-        <DialogContent className="bg-white p-6">
+        <DialogContent className="bg-white p-6 h-full">
           <DialogHeader className=" w-11/12 mx-auto ">
             <div className=" w-full flex items-center justify-center my-2">
               <Image height={180} width={180} src={logo} alt="" />
