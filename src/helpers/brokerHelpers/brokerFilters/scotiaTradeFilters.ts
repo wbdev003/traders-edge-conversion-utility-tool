@@ -6,86 +6,71 @@ import { mapToProperFormat } from "../brokerhelpers";
  */
 
 export function scotiaTradeFilter(data: any): Array<Array<string>> {
-  // Implementation for TD filtering
   const final: Array<Array<string>> = [];
-  let accountNum = data[1][1].split(" - ")[1];
 
-  for (let i = 4; i < data.length; i++) {
-    let temp = [];
-    let date, month, day, year;
+  // Implementation for Scotia filtering
+  for (let i = 1; i < data.length; i++) {
+    const temp: Array<string> = [];
 
     for (let j = 0; j < data[i].length; j++) {
-      // looks through every column by index and changes it based on requirementsif (j === 3) {
-      if (j === 3) {
-        if (data[i][j] === "SELL") {
-          temp.push("Sell");
+      // Looks through every column by index and changes it based on requirements
+      if (j === 2) {
+        if (data[i][j] === "Buy") {
+          temp.push("BUY");
           temp.push(data[i][j]);
-        } else if (data[i][j] === "BUY") {
-          temp.push("Buy");
-          temp.push(data[i][j]);
-        } else {
-          temp.push("Unallocated");
-          temp.push(data[i][j]);
-        }
-      } else if (j === 3) {
-        if (data[i][j] === "SELL") {
-          temp.push("sell");
-          temp.push(data[i][j]);
-        } else if (data[i][j] === "BUY") {
-          temp.push("buy");
+        } else if (data[i][j] === "Sell") {
+          temp.push("SELL");
           temp.push(data[i][j]);
         } else {
           temp.push("unallocated");
           temp.push(data[i][j]);
         }
-      } else if (j === 0 || j === 1) {
-        date = new Date(data[i][j]);
-        month = (date.getMonth() + 1).toString().padStart(2, "0");
-        day = date.getDate().toString().padStart(2, "0");
-        year = date.getFullYear();
-
-        temp.push(`${month}/${day}/${year}`);
+      } else if (j === 11) {
+        temp.push(data[i][j] + data[i][10]);
       } else if (j === 4) {
-        temp.push(Math.abs(data[i][j]));
-      } else if (j === 5) {
-        /* if (data[i][4] === 0) {
-            temp.push(0);
-          } else {
-            const pricePerQuantity = Math.abs(data[i][5]) / Math.abs(data[i][4]);
-            temp.push(pricePerQuantity.toFixed(8));
-          } */
-        if (data[i][4] === 0) {
-          temp.push(0);
+        const name = data[i][2].split("COM")[0];
+        console.log(name);
+        temp.push(name);
+      } else if (j === 3) {
+        const symbol = data[i][j];
+        temp.push(symbol[0]);
+        if (symbol[1] === "TO") {
+          temp.push("TSX");
+        } else if (symbol[1] === "VN") {
+          temp.push("TSXV");
         } else {
-          const pricePerQuantity = Math.abs(data[i][5]);
-          temp.push(pricePerQuantity.toFixed(2));
+          temp.push("other");
         }
-      } else if (j === 6) {
-        temp.push(data[i][j] ? parseInt(data[i][j]) : 0);
-      } else if (j === 7) {
-        temp.push(Math.abs(data[i][j]));
+      } else if (j === 0 || j === 1) {
+        const entry = data[i][j];
+        temp.push(entry);
       } else if (j === 9) {
-        temp.push(data[i][j]);
+        temp.push(String(Math.abs(data[i][9])));
+      } else if (j === 5) {
+        temp.push(String(Math.abs(data[i][j])));
+      } else if (j === 6) {
+        temp.push((Math.abs(data[i][9]) / Math.abs(data[i][5])).toFixed(4));
       } else {
         temp.push(data[i][j]);
       }
     }
-    temp.push(accountNum);
-    temp.push("");
-    temp.push("");
-  }
 
+    if (data[i][0]) {
+      temp.push(data[i][4].split(" COM ")[0]);
+      final.push(temp);
+    }
+  } // Converts all of the important columns into proper format
   return mapToProperFormat(final, {
-    9: 0,
+    13: 0,
     0: 1,
     1: 2,
-    11: 3,
-    10: 4,
-    12: 5,
-    3: 6,
-    4: 7,
-    5: 8,
-    6: 9,
-    8: 1,
+    4: 5,
+    5: 4,
+    16: 5,
+    3: 2,
+    2: 7,
+    7: 8,
+    8: 9,
+    11: 10,
   });
 }

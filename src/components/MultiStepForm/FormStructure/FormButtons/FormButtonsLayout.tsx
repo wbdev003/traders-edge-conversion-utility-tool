@@ -31,18 +31,18 @@ const FormButtonsLayout = ({
 
   return (
     <div
-      className={`space-x-5 flex justify-center sm:justify-end items-center mt-14`}
+      className={`space-x-5 flex justify-center sm:justify-end items-center mt-14 fixed bottom-5 left-1/2 transform -translate-x-1/2`}
     >
       {formStep > 1 && displayBtn1 && (
         <Button
           variant={"outline"}
-          className="flex m-0 w-fit p-0 px-2 pr-4 border-slate-300"
+          className="flex m-0 w-fit p-0 px-2 pr-4 border-slate-300 rounded-full"
           onClick={() => {
             btn1Function();
           }}
         >
           <Icons type="back" size={20} color="#334155" />
-          <p className="pl-1">{btn1Title}</p>
+          <p className="pl-1 text-xl">{btn1Title}</p>
         </Button>
       )}
       {/* if Is disabled */}
@@ -50,22 +50,22 @@ const FormButtonsLayout = ({
         (disabledCondition ? (
           <Button
             disabled
-            className="flex m-0 w-fit p-0 px-2 pl-5 bg-slate-700"
+            className="flex m-0 w-fit p-0 px-2 pl-5 bg-slate-700 rounded-full"
             onClick={() => {
               btn2Function();
             }}
           >
-            <p>{btn2Title}</p>
+            <p className="text-lg">{btn2Title}</p>
             <Icons type="next" size={25} color="white" />
           </Button>
         ) : (
           <Button
-            className="flex m-0 w-fit p-0 px-2 pl-5 bg-slate-700"
+            className="flex m-0 w-fit p-0 px-2 pl-5 bg-slate-700 rounded-full"
             onClick={() => {
               btn2Function();
             }}
           >
-            <p>{btn2Title}</p>
+            <p className="text-lg">{btn2Title}</p>
             <Icons type="next" size={25} color="white" />
           </Button>
         ))}
