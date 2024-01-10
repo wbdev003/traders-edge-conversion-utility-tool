@@ -88,10 +88,6 @@ const MultiStepForm: React.FC = () => {
     },
   };
 
-  useEffect(() => {
-    console.log(fileData);
-  }, [fileData]);
-
   return (
     <FormStructure
       title={formFields[formStep].title}

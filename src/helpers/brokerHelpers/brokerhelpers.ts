@@ -2,6 +2,7 @@ import { tdTradeFilter } from "./brokerFilters/tdTradeFilters";
 import { questTradeFilter } from "./brokerFilters/questTradeFilters";
 import { rbcTradeFilter } from "./brokerFilters/rbcTradeFilters";
 import { ibkrTradeFilter } from "./brokerFilters/ibkrTradeFilters";
+import { scotiaTradeFilter } from "./brokerFilters/scotiaTradeFilters";
 
 // Define a variable to hold the selected type (questrade, TD, RBC)
 export const header = [
@@ -69,85 +70,6 @@ export function checkArrayEqual(arrayOne: any[], arrayTwo: any[]): boolean {
     console.log("equal");
     return true;
   } else {
-    console.log("not equal");
-    return false;
-  }
-}
-
-/**
- * Checks for error cases based on the selected type.
- * @param {any} args - Data array to check for errors.
- * @returns {boolean} - False if an error is detected, true otherwise.
- */
-export function errorCase(
-  args: any,
-  selectedBroker: string
-): boolean | string[][] {
-  // Add if statements for new types in error cases here
-
-  // Questrade
-  if (selectedBroker === "questrade") {
-    if (
-      checkArrayEqual(args[0], [
-        "Transaction Date",
-        "Settlement Date",
-        "Action",
-        "Symbol",
-        "Description",
-        "Quantity",
-        "Price",
-        "Gross Amount",
-        "Commission",
-        "Net Amount",
-        "Currency",
-        "Account #",
-        "Activity Type",
-        "Account Type",
-      ])
-    ) {
-      return questTradeFilter(args);
-    } else {
-      return false;
-    }
-  } else if (selectedBroker === "td") {
-    if (
-      checkArrayEqual(args[3], [
-        "Trade Date",
-        "Settle Date",
-        "Description",
-        "Action",
-        "Quantity",
-        "Price",
-        "Commission",
-        "Net Amount",
-      ])
-    ) {
-      return tdTradeFilter(args);
-    } else {
-      return false;
-    }
-  } else if (selectedBroker === "rbc") {
-    if (
-      checkArrayEqual(args[8], [
-        "Date",
-        "Activity",
-        "Symbol",
-        "Symbol Description",
-        "Quantity",
-        "Price",
-        "Settlement Date",
-        "Account",
-        "Value",
-        "Currency",
-        "Description",
-      ])
-    ) {
-      return rbcTradeFilter(args);
-    } else {
-      return false;
-    }
-  } else {
-    // Case when nothing is selected
     console.log("not equal");
     return false;
   }
@@ -244,6 +166,25 @@ export async function errorCasePromise(
       ])
     ) {
       return ibkrTradeFilter(args);
+    } else {
+      return false;
+    }
+  } else if (selectedBroker === "scotia") {
+    if (
+      checkArrayEqual(args[0], [
+        "Description",
+        "Symbol",
+        "Transaction Date",
+        "Settlement Date",
+        "Account Currency",
+        "Type",
+        "Quantity",
+        "Currency of Price",
+        "Price",
+        "Settlement Amount",
+      ])
+    ) {
+      return scotiaTradeFilter(args);
     } else {
       return false;
     }

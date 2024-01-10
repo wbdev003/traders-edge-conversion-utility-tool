@@ -11,6 +11,7 @@ const brokerData = [
   { img: tdLogo, title: "TD Direct Investing", identifier: "td" },
   { img: rbcLogo, title: "RBC Direct Investing", identifier: "rbc" },
   { img: ibLogo, title: "Interactive Brokers", identifier: "ib" },
+  { img: scotiaItradeLogo, title: "Scotia ITrade", identifier: "scotia" },
 ];
 const SelectBrokerStep = () => {
   return (
