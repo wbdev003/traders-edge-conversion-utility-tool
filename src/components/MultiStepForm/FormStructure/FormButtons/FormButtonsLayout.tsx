@@ -36,13 +36,13 @@ const FormButtonsLayout = ({
       {formStep > 1 && displayBtn1 && (
         <Button
           variant={"outline"}
-          className="flex m-0 w-fit p-0 px-2 pr-4 border-slate-300 rounded-full"
+          className="flex m-0 w-fit p-0 px-2 pr-4 border-slate-300 border-solid rounded-full bg-slate-50"
           onClick={() => {
             btn1Function();
           }}
         >
           <Icons type="back" size={20} color="#334155" />
-          <p className="pl-1 text-xl">{btn1Title}</p>
+          <p className="pl-1 text-lg">{btn1Title}</p>
         </Button>
       )}
       {/* if Is disabled */}
