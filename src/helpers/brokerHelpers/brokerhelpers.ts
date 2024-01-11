@@ -3,6 +3,7 @@ import { questTradeFilter } from "./brokerFilters/questTradeFilters";
 import { rbcTradeFilter } from "./brokerFilters/rbcTradeFilters";
 import { ibkrTradeFilter } from "./brokerFilters/ibkrTradeFilters";
 import { scotiaTradeFilter } from "./brokerFilters/scotiaTradeFilters";
+import { vbTradeFilter } from "./brokerFilters/vbTradeFilter";
 
 // Define a variable to hold the selected type (questrade, TD, RBC)
 export const header = [
@@ -185,6 +186,29 @@ export async function errorCasePromise(
       ])
     ) {
       return scotiaTradeFilter(args);
+    } else {
+      return false;
+    }
+  } else if (selectedBroker === "vb") {
+    if (
+      checkArrayEqual(args[0], [
+        "Account Number",
+        "Effective Date",
+        "Process Date",
+        "Description",
+        "TX Type",
+        "Symbol",
+        "TransactionID",
+        "SubTransactionID",
+        "SecurityType",
+        "CC",
+        "QTY",
+        "COMSN",
+        "Price",
+        "Net Amount",
+      ])
+    ) {
+      return vbTradeFilter(args);
     } else {
       return false;
     }

@@ -1,5 +1,5 @@
 "use client";
-import React, { useEffect } from "react";
+import React from "react";
 import { useFormStepStore } from "@/store/useFormStepStore";
 import { useSelectionStore } from "@/store/useSelectionStore";
 import { useFileUploadStore } from "@/store/useFileUploadStore";
