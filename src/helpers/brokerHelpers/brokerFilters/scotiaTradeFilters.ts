@@ -14,7 +14,7 @@ export function scotiaTradeFilter(data: any): Array<Array<string>> {
 
     for (let j = 0; j < data[i].length; j++) {
       // Looks through every column by index and changes it based on requirements
-      if (j === 2) {
+      /* if (j === 2) {
         if (data[i][j] === "Buy") {
           temp.push("BUY");
           temp.push(data[i][j]);
@@ -52,6 +52,15 @@ export function scotiaTradeFilter(data: any): Array<Array<string>> {
         temp.push((Math.abs(data[i][9]) / Math.abs(data[i][5])).toFixed(4));
       } else {
         temp.push(data[i][j]);
+      } */
+      if (j === 5) {
+        temp.push(data[i][j]);
+      } else if (j === 6) {
+        temp.push(data[i][5]);
+      } else if (j === 9) {
+        temp.push(String(Math.abs(data[i][9])));
+      } else {
+        temp.push(data[i][j]);
       }
     }
 
@@ -60,17 +69,19 @@ export function scotiaTradeFilter(data: any): Array<Array<string>> {
       final.push(temp);
     }
   } // Converts all of the important columns into proper format
+  // left is representing the array csv - non-zero indexed
+  // right is representing the position in the table - zero indexed
   return mapToProperFormat(final, {
     13: 0,
-    0: 1,
-    1: 2,
-    4: 5,
-    5: 4,
-    16: 5,
+    2: 1,
     3: 2,
-    2: 7,
+    1: 3,
+    14: 4,
+    0: 5,
+    5: 6,
+    6: 7,
     7: 8,
-    8: 9,
-    11: 10,
+    9: 9,
+    10: 10,
   });
 }
