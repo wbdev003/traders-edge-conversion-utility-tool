@@ -2,47 +2,44 @@
 import React from "react";
 import {
   Dialog,
-  DialogClose,
-  DialogContent,
   DialogDescription,
-  DialogFooter,
   DialogHeader,
+  DialogContent,
   DialogTitle,
-  DialogTrigger,
 } from "@/components/ui/dialog";
 import { useModalStore } from "@/store/useModalStore";
-import { Separator } from "@/components/ui/separator";
+import LinkButton from "../Buttons/LinkButton";
+import { Separator } from "@radix-ui/react-separator";
+import Link from "next/link";
 import logo from "../../../../public/images/traders-edge-logo.png";
 import Image from "next/image";
-import LinkButton from "../Buttons/LinkButton";
-import Link from "next/link";
 
-const Modal = () => {
+const supportEmail = "conversion@tradersedge.ca";
+// data for each step
+const steps = [
+  {
+    title: "Choose Your Broker",
+    content: [
+      '• Select "Choose Your Broker" to specify the broker from which you are importing data. to ensure accurate data conversion for your broker.',
+    ],
+  },
+  {
+    title: "Import Trade CSV File",
+    content: [
+      'Select "Import Trade CSV File" to browse and upload the CSV file containing your trade history from your broker. This step will validate and process the CSV file, extracting the relevant trading information.',
+    ],
+  },
+  {
+    title: "Review Your Trade Conversion",
+    content: [
+      'Navigate to "Trade Conversion" to review the list of your trades. Verify the accuracy of the imported data, including trade details, timestamps, and any associated information and make required adjustments or corrections. Then save the file to your computer as a .csv format',
+    ],
+  },
+];
+
+const InstructionModal = () => {
   /* State */
   const { toggleModal, setToggleModal } = useModalStore();
-  const supportEmail = "conversion@tradersedge.ca";
-  // Data for each step
-  const steps = [
-    {
-      title: "Choose Your Broker",
-      content: [
-        '•	Select "Choose Your Broker" to specify the broker from which you are importing data. to ensure accurate data conversion for your broker.',
-      ],
-    },
-    {
-      title: "Import Trade CSV File",
-      content: [
-        'Select "Import Trade CSV File" to browse and upload the CSV file containing your trade history from your broker. This step will validate and process the CSV file, extracting the relevant trading information.',
-      ],
-    },
-    {
-      title: "Review Your Trade Conversion",
-      content: [
-        'Navigate to "Trade Conversion" to review the list of your trades. Verify the accuracy of the imported data, including trade details, timestamps, and any associated information and make required adjustments or corrections. Then save the file to your computer as a .csv format',
-      ],
-    },
-  ];
-
   return (
     <div>
       <Dialog
@@ -100,4 +97,4 @@ const Modal = () => {
   );
 };
 
-export default Modal;
+export default InstructionModal;

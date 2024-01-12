@@ -15,6 +15,7 @@ import { convertTradeData } from "@/helpers/apiClient/apiClient";
 import { useLoadingStore } from "@/store/useLoadingStore";
 import LoadingSkeleton from "./FormSteps/Loading/LoadingSkeleton";
 import { useToast } from "../ui/use-toast";
+import InstructionCard from "../Common/Cards/InstructionCard";
 
 const MultiStepForm: React.FC = () => {
   const { brokerIndex, brokerSelection } = useSelectionStore();
@@ -23,7 +24,6 @@ const MultiStepForm: React.FC = () => {
     useFileUploadStore();
   const { loading, setLoading } = useLoadingStore();
   const toggleModal = useToggleModal();
-
   const notSaved = true;
   useLeavePageWarning(notSaved);
   /* Display toast notifications. */
@@ -89,38 +89,41 @@ const MultiStepForm: React.FC = () => {
   };
 
   return (
-    <FormStructure
-      title={formFields[formStep].title}
-      description={formFields[formStep].description}
-    >
-      {formStep === 1 && (
-        <>
-          <SelectBrokerStep />
-          <FormButtonsLayout {...formFields[formStep]} />
-        </>
-      )}
-      {formStep === 2 && (
-        <>
-          {loading ? (
-            <>
-              <LoadingSkeleton />
-              <FormButtonsLayout {...formFields[formStep]} />
-            </>
-          ) : (
-            <>
-              <UploadFileStep />
-              <FormButtonsLayout {...formFields[formStep]} />
-            </>
-          )}
-        </>
-      )}
-      {formStep === 3 && (
-        <>
-          <DisplayDataStep />
-          <FormButtonsLayout {...formFields[formStep]} />
-        </>
-      )}
-    </FormStructure>
+    <div className=" flex w-full justify-between space-x-4 ">
+      <FormStructure
+        title={formFields[formStep].title}
+        description={formFields[formStep].description}
+      >
+        {formStep === 1 && (
+          <>
+            <SelectBrokerStep />
+            <FormButtonsLayout {...formFields[formStep]} />
+          </>
+        )}
+        {formStep === 2 && (
+          <>
+            {loading ? (
+              <>
+                <LoadingSkeleton />
+                <FormButtonsLayout {...formFields[formStep]} />
+              </>
+            ) : (
+              <>
+                <UploadFileStep />
+                <FormButtonsLayout {...formFields[formStep]} />
+              </>
+            )}
+          </>
+        )}
+        {formStep === 3 && (
+          <>
+            <DisplayDataStep />
+            <FormButtonsLayout {...formFields[formStep]} />
+          </>
+        )}
+      </FormStructure>
+      <InstructionCard />
+    </div>
   );
 };
 

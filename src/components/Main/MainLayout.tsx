@@ -5,11 +5,11 @@ import SubHeader from "../Common/SubHeader/SubHeader";
 import ProgressBarLayout from "../Common/ProgressBar/ProgressBarLayout";
 import Divider from "../Common/Divider/Divider";
 import MultiStepFormLayout from "../MultiStepForm/MultiStepFormLayout";
-import Modal from "../Common/Modal/Modal";
+import InstructionModal from "../Common/Modal/InstructionModal";
 
 const MainLayout = () => {
   return (
-    <div className="bg-slate-200 min-h-screen h-full pb-36">
+    <div className="bg-slate-200 min-h-screen h-full pb-36 ">
       <Nav />
       <SubHeader />
       <Divider width="1" />
@@ -17,7 +17,7 @@ const MainLayout = () => {
       <Container>
         <MultiStepFormLayout />
       </Container>
-      <Modal />
+      <InstructionModal />
     </div>
   );
 };

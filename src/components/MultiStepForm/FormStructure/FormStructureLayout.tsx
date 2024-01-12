@@ -21,7 +21,7 @@ const FormStructure: React.FC<FormStructureProps> = ({
   description,
 }) => {
   return (
-    <Card className="mt-6 rounded-xl p-7 bg-slate-50 shadow-md min-h-fit ">
+    <Card className="mt-6 rounded-xl p-7 bg-slate-50 shadow-md min-h-fit w-11/12 min-w-fit">
       <CardHeader className="p-0 m-0 text-center relative">
         <CardTitle className="text-2xl sm:text-3xl font-semibold text-slate-700">
           {title}
