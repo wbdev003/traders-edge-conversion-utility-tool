@@ -15,53 +15,32 @@ import { Separator } from "@/components/ui/separator";
 import logo from "../../../../public/images/traders-edge-logo.png";
 import Image from "next/image";
 import LinkButton from "../Buttons/LinkButton";
+import Link from "next/link";
 
 const Modal = () => {
   /* State */
   const { toggleModal, setToggleModal } = useModalStore();
-
+  const supportEmail = "conversion@tradersedge.ca";
   // Data for each step
   const steps = [
-    /* {
-      title: "Getting Started",
-      content: [
-        'Launch the conversion tool and select "Get Started."',
-        "This step serves as an introduction to the conversion process.",
-        "No specific action is required in this step; it is a brief overview to initiate the process.",
-      ],
-    }, */
     {
       title: "Choose Your Broker",
       content: [
-        'Click on "Choose Your Broker" to specify the trading platform or broker from which you are importing data.',
-        /*         "Provide any necessary credentials or authentication details to access your trade information securely.",
-         */ "This step ensures accurate data extraction tailored to your specific broker.",
+        '•	Select "Choose Your Broker" to specify the broker from which you are importing data. to ensure accurate data conversion for your broker.',
       ],
     },
     {
       title: "Import Trade CSV File",
       content: [
-        'In this step, you\'ll import your trade data by selecting the "Import Trade CSV File" option.',
-        "Browse and upload the CSV file containing your trade history.",
-        "The tool will validate and process the CSV file, extracting relevant trading information.",
+        'Select "Import Trade CSV File" to browse and upload the CSV file containing your trade history from your broker. This step will validate and process the CSV file, extracting the relevant trading information.',
       ],
     },
     {
-      title: "Review Your Trade Imports",
+      title: "Review Your Trade Conversion",
       content: [
-        'After the file is processed, navigate to "Your Trade Imports" to review a comprehensive list of your trades.',
-        "Verify the accuracy of the imported data, including trade details, timestamps, and any associated information.",
-        "If needed, make adjustments or corrections.",
+        'Navigate to "Trade Conversion" to review the list of your trades. Verify the accuracy of the imported data, including trade details, timestamps, and any associated information and make required adjustments or corrections. Then save the file to your computer as a .csv format',
       ],
     },
-    /* {
-      title: "Submit",
-      content: [
-        'Once you are satisfied with the imported data, click on "Submit" to finalize the conversion process.',
-        "The tool will consolidate the data and generate a summary report for your reference.",
-        "Review the summary to ensure all trades are accurately converted and imported.",
-      ],
-    }, */
   ];
 
   return (
@@ -107,12 +86,12 @@ const Modal = () => {
             ))}
             <DialogDescription className=" w-11/12 mx-auto  py-3 px-5 bg-slate-200 rounded-lg ">
               <strong>Support:</strong> For any issues or questions, consult the
-              tool&apos;s documentation or reach out to our support team. For
-              more details visit{" "}
-              <LinkButton href="https://www.tradersedge.ca/" target="_blank">
-                www.tradersedge.ca
-              </LinkButton>
-              .
+              tool&apos;s documentation or reach out to our support team at:
+              <Link href={`mailto:${supportEmail}`}>
+                <p className="text-slate-500 font-semibold hover:text-slate-400">
+                  {supportEmail}
+                </p>
+              </Link>
             </DialogDescription>
           </div>
         </DialogContent>
