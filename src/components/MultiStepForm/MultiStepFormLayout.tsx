@@ -23,7 +23,7 @@ const MultiStepForm: React.FC = () => {
   const { fileData, fileDetails, setProcessedData, processedData } =
     useFileUploadStore();
   const { loading, setLoading } = useLoadingStore();
-  const toggleModal = useToggleModal();
+  /* const toggleModal = useToggleModal(); */
   const notSaved = true;
   useLeavePageWarning(notSaved);
   /* Display toast notifications. */
