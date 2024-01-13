@@ -45,7 +45,7 @@ const InstructionModal = () => {
       <Dialog
         open={toggleModal}
         defaultOpen={toggleModal}
-        onOpenChange={() => setToggleModal(!toggleModal)}
+        onOpenChange={() => setToggleModal(toggleModal)} // temporary change to remove toggle modal appear on site visit
       >
         <DialogContent className="bg-white p-6 max-h-full h-fit">
           <DialogHeader className=" w-11/12 mx-auto ">
