@@ -240,23 +240,23 @@ export async function errorCasePromise(
     } else {
       return false;
     }
-  } else if (selectedBroker === "nb") {
+  } else if (selectedBroker === "nationalMulti") {
     if (
       checkArrayEqual(args[0], [
-        "Account Number",
-        "Effective Date",
-        "Process Date",
-        "Description",
-        "TX Type",
+        "Account number",
+        "Account description",
+        "Trade date",
+        "Settlement date",
+        "Processing date",
+        "Market",
         "Symbol",
-        "TransactionID",
-        "SubTransactionID",
-        "SecurityType",
-        "CC",
-        "QTY",
-        "COMSN",
+        "Description",
+        "Operation",
+        "Quantity",
         "Price",
-        "Net Amount",
+        "Net amount",
+        "Balance as at settlement date",
+        "Current balance",
       ])
     ) {
       return nationalMultiTradeFilter(args);

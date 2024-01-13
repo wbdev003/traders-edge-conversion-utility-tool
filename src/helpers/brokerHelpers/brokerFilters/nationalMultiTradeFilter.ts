@@ -17,23 +17,12 @@ export function nationalMultiTradeFilter(data: any): Array<Array<string>> {
 
       if (j === 5) {
         temp.push(data[i][j]);
-      } else if (j === 7) {
-        temp.push(data[i][6]);
-      } else if (j === 11) {
-        let calc = data[i][13] / data[i][10];
-        console.log(data[i][10]);
-        temp.push(String(Math.abs(calc)));
-      } else if (j === 3) {
-        if (data[i][j] === "SELL") {
-          temp.push("sell");
-          temp.push(data[i][j]);
-        } else if (data[i][j] === "BUY") {
-          temp.push("buy");
-          temp.push(data[i][j]);
-        } else {
-          temp.push("unallocated");
-          temp.push(data[i][j]);
-        }
+      } else if (j === 9) {
+        temp.push(data[i][8]);
+      } else if (j === 12) {
+        temp.push(data[i][9]);
+      } else if (j === 10) {
+        temp.push(`${(data[i][12] / data[i][11]).toFixed(2)}`);
       } else {
         temp.push(data[i][j]);
       }
@@ -47,16 +36,16 @@ export function nationalMultiTradeFilter(data: any): Array<Array<string>> {
   // left is representing the array csv - non-zero indexed
   // right is representing the position in the table - zero indexed
   return mapToProperFormat(final, {
-    0: 0,
-    1: 1,
-    2: 2,
-    6: 3,
-    24: 4, // idk
-    4: 5, // security name
-    5: 6, // ty type
-    47: 7, // broker type
-    11: 8, //#units
-    12: 9, // #price unit
-    14: 10, // amount
+    0: 0, // account number
+    2: 1, // trade date
+    3: 2, // settlement date
+    6: 3, // symbol
+    122: 4, // exchange
+    7: 5, // security name
+    8: 6, // te type
+    9: 7, // broker type
+    12: 8, //#units
+    10: 9, // #price unit
+    11: 10, // amount
   });
 }

@@ -17,7 +17,11 @@ const brokerData = [
   { img: scotiaItradeLogo, title: "Scotia ITrade", identifier: "scotia" },
   { img: vbLogo, title: "Virtual Brokers", identifier: "vb" },
   { img: cibcLogo, title: "CIBC Investor's Edge", identifier: "cibc" },
-  { img: nationalbankLogo, title: "National Bank", identifier: "nationalbank" },
+  {
+    img: nationalbankLogo,
+    title: "National Bank",
+    identifier: "nationalMulti",
+  },
 ];
 const SelectBrokerStep = () => {
   return (
