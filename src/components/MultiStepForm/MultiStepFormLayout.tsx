@@ -15,7 +15,7 @@ import { convertTradeData } from "@/helpers/apiClient/apiClient";
 import { useLoadingStore } from "@/store/useLoadingStore";
 import LoadingSkeleton from "./FormSteps/Loading/LoadingSkeleton";
 import { useToast } from "../ui/use-toast";
-import InstructionCard from "../Common/Cards/InstructionCard";
+import InstructionLayout from "./Instruction/InstructionLayout";
 
 const MultiStepForm: React.FC = () => {
   const { brokerIndex, brokerSelection } = useSelectionStore();
@@ -90,7 +90,7 @@ const MultiStepForm: React.FC = () => {
 
   return (
     <div className=" flex w-full justify-between space-x-4 ">
-      <div className=" basis-8/12">
+      <div className="basis-8/12">
         <FormStructure
           title={formFields[formStep].title}
           description={formFields[formStep].description}
@@ -125,7 +125,7 @@ const MultiStepForm: React.FC = () => {
         </FormStructure>
       </div>
       <div className="basis-4/12">
-        <InstructionCard />
+        <InstructionLayout />
       </div>
     </div>
   );

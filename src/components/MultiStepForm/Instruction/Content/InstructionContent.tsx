@@ -1,10 +1,10 @@
 import React from "react";
 import Image from "next/image";
 import Link from "next/link";
-import LinkButton from "../Buttons/LinkButton";
+import LinkButton from "../../../Common/Buttons/LinkButton";
 import logo from "../../../../public/images/traders-edge-logo.png";
 import { Separator } from "@/components/ui/separator";
-import Icons from "../Icons/Icons";
+import Icons from "../../../Common/Icons/Icons";
 import { Button } from "@nextui-org/react";
 
 const InstructionContent = () => {
@@ -38,7 +38,7 @@ const InstructionContent = () => {
           Instructions
         </h2>
       </div>
-      <div className=" space-y-4 w-full pt-6">
+      <div className="space-y-4 pt-6 h-96 overflow-y-scroll">
         {steps.map((step, index) => (
           <div className="w-full mx-auto text-slate-500" key={index}>
             <strong className="text-md md:text-md text-slate-500">{`Step ${
@@ -53,6 +53,7 @@ const InstructionContent = () => {
             </ul>
           </div>
         ))}
+
         <div className=" mx-auto py-3 px-5 bg-slate-200 rounded-lg ">
           <strong>Support:</strong> For any issues or questions, consult the
           tool&apos;s documentation or reach out to our support team at:

@@ -1,10 +1,10 @@
 import React from "react";
 import { Card, CardBody } from "@nextui-org/react";
-import InstructionContent from "../Content/InstructionContent";
+import InstructionContent from "@/components/MultiStepForm/Instruction/Content/InstructionContent";
 import { Button } from "@/components/ui/button";
-import Icons from "../Icons/Icons";
+import Icons from "@/components/Common/Icons/Icons";
 
-const InstructionCard = () => {
+const InstructionLayout = () => {
   return (
     <Card className="shadow-md h-fit rounded-xl overflow-hidden bg-slate-50 mt-6 z-0 p-7 min-w-full">
       {/* <div className=" w-full flex justify-end absolute top-3 right-3">
@@ -19,4 +19,4 @@ const InstructionCard = () => {
   );
 };
 
-export default InstructionCard;
+export default InstructionLayout;
