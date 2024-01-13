@@ -6,7 +6,7 @@ export async function convertTradeData(
 ) {
   // https://trade-conversion-utility-tool.vercel.app/api/convert
   // http://localhost:3000/
-  const apiUrl = `http://localhost:3000//api/convert`; // Replace with your actual backend API URL
+  const apiUrl = `${process.env.NEXT_PUBLIC_API_URL}`; // Replace with your actual backend API URL
 
   try {
     const response = await fetch(apiUrl, {
