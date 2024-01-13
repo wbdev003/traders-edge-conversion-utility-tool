@@ -3,7 +3,10 @@ import { Separator } from "@/components/ui/separator";
 
 const GetStartedStep = () => {
   return (
-    <div className="text-slate-700 font-normal max-w-xl mt-8 mx-auto py-3 px-10 bg-slate-200 rounded-xl shadow-lg border-slate-400 border-solid border-2">
+    <div
+      className="text-slate-700 font-normal max-w-xl mt-8 mx-auto py-3 px-10 bg-slate-200 rounded-xl shadow-lg 
+      border-slate-400 border-solid border-2 "
+    >
       <p className="text-center text-lg font-semibold mb-4">
         Welcome to the Trade Conversion Utility Tool. Follow these steps to get
         started:

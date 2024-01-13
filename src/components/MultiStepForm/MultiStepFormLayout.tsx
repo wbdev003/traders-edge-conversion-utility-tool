@@ -90,39 +90,43 @@ const MultiStepForm: React.FC = () => {
 
   return (
     <div className=" flex w-full justify-between space-x-4 ">
-      <FormStructure
-        title={formFields[formStep].title}
-        description={formFields[formStep].description}
-      >
-        {formStep === 1 && (
-          <>
-            <SelectBrokerStep />
-            <FormButtonsLayout {...formFields[formStep]} />
-          </>
-        )}
-        {formStep === 2 && (
-          <>
-            {loading ? (
-              <>
-                <LoadingSkeleton />
-                <FormButtonsLayout {...formFields[formStep]} />
-              </>
-            ) : (
-              <>
-                <UploadFileStep />
-                <FormButtonsLayout {...formFields[formStep]} />
-              </>
-            )}
-          </>
-        )}
-        {formStep === 3 && (
-          <>
-            <DisplayDataStep />
-            <FormButtonsLayout {...formFields[formStep]} />
-          </>
-        )}
-      </FormStructure>
-      <InstructionCard />
+      <div className=" basis-8/12">
+        <FormStructure
+          title={formFields[formStep].title}
+          description={formFields[formStep].description}
+        >
+          {formStep === 1 && (
+            <>
+              <SelectBrokerStep />
+              <FormButtonsLayout {...formFields[formStep]} />
+            </>
+          )}
+          {formStep === 2 && (
+            <>
+              {loading ? (
+                <>
+                  <LoadingSkeleton />
+                  <FormButtonsLayout {...formFields[formStep]} />
+                </>
+              ) : (
+                <>
+                  <UploadFileStep />
+                  <FormButtonsLayout {...formFields[formStep]} />
+                </>
+              )}
+            </>
+          )}
+          {formStep === 3 && (
+            <>
+              <DisplayDataStep />
+              <FormButtonsLayout {...formFields[formStep]} />
+            </>
+          )}
+        </FormStructure>
+      </div>
+      <div className="basis-4/12">
+        <InstructionCard />
+      </div>
     </div>
   );
 };
