@@ -4,6 +4,8 @@ import { rbcTradeFilter } from "./brokerFilters/rbcTradeFilters";
 import { ibkrTradeFilter } from "./brokerFilters/ibkrTradeFilters";
 import { scotiaTradeFilter } from "./brokerFilters/scotiaTradeFilters";
 import { vbTradeFilter } from "./brokerFilters/vbTradeFilter";
+import { cibcTradeFilter } from "./brokerFilters/cibcTradeFilters";
+import { nationalMultiTradeFilter } from "./brokerFilters/nationalMultiTradeFilter";
 
 // Define a variable to hold the selected type (questrade, TD, RBC)
 export const header = [
@@ -209,6 +211,55 @@ export async function errorCasePromise(
       ])
     ) {
       return vbTradeFilter(args);
+    } else {
+      return false;
+    }
+  } else if (selectedBroker === "cibc") {
+    if (
+      checkArrayEqual(args[9], [
+        "Transaction Date",
+        "Settlement Date",
+        "Currency of Sub-account Held In",
+        "Transaction Type",
+        "Symbol",
+        "Market",
+        "Description",
+        "Quantity",
+        "Currency of Price",
+        "Price",
+        "Commission",
+        "Exchange Rate",
+        "Currency of Amount",
+        "Amount",
+        "Settlement Instruction",
+        "Exchange Rate (Canadian Equivalent)",
+        "Canadian Equivalent",
+      ])
+    ) {
+      return cibcTradeFilter(args);
+    } else {
+      return false;
+    }
+  } else if (selectedBroker === "nb") {
+    if (
+      checkArrayEqual(args[0], [
+        "Account Number",
+        "Effective Date",
+        "Process Date",
+        "Description",
+        "TX Type",
+        "Symbol",
+        "TransactionID",
+        "SubTransactionID",
+        "SecurityType",
+        "CC",
+        "QTY",
+        "COMSN",
+        "Price",
+        "Net Amount",
+      ])
+    ) {
+      return nationalMultiTradeFilter(args);
     } else {
       return false;
     }
