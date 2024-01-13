@@ -28,6 +28,11 @@ yarn-error.log*
 # local env files
 .env*.local
 
+# Ignore environment variables
+.env.local
+.env.development
+.env.production
+
 # vercel
 .vercel
 
