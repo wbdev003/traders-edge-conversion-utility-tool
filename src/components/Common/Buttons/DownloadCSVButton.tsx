@@ -65,10 +65,10 @@ const DownloadCSVButton = ({ data, fileName }: DownloadCSVButtonProps) => {
       ) : (
         <Button
           disabled
-          className="bg-slate-700 m-0 p-0 px-2 pr-4 pl-5 w-fit text-slate-200"
+          className="bg-slate-700 m-0 p-0 px-2 pr-4 pl-5 w-fit text-slate-200 rounded-full"
         >
           <Loader2 className="mr-2 h-4 w-4 animate-spin" />
-          Please wait
+          <p className="text-lg">Please wait</p>
         </Button>
       )}
     </>
