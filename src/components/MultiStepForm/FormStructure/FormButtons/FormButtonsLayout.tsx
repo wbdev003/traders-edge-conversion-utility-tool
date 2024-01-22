@@ -31,7 +31,7 @@ const FormButtonsLayout = ({
 
   return (
     <div
-      className={`z-10 space-x-5 flex justify-center sm:justify-end items-center mt-14 fixed bottom-5 left-1/2 transform -translate-x-1/2 bg-slate-300 p-3 rounded-full shadow-xl`}
+      className={`z-10 space-x-5 flex justify-center sm:justify-end items-center  rounded-full `}
     >
       {formStep > 1 && displayBtn1 && (
         <Button

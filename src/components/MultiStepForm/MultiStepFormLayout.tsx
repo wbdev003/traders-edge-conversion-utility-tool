@@ -23,10 +23,8 @@ const MultiStepForm: React.FC = () => {
   const { fileData, fileDetails, setProcessedData, processedData } =
     useFileUploadStore();
   const { loading, setLoading } = useLoadingStore();
-  /* const toggleModal = useToggleModal(); */
   const notSaved = true;
   useLeavePageWarning(notSaved);
-  /* Display toast notifications. */
   const { toast } = useToast();
 
   const formFields: Record<number, FormFields> = {
@@ -90,6 +88,9 @@ const MultiStepForm: React.FC = () => {
 
   return (
     <div className=" flex w-full justify-between space-x-4 ">
+      <div className="basis-4/12">
+        <InstructionLayout />
+      </div>
       <div className="basis-8/12">
         <FormStructure
           title={formFields[formStep].title}
@@ -98,7 +99,6 @@ const MultiStepForm: React.FC = () => {
           {formStep === 1 && (
             <>
               <SelectBrokerStep />
-              <FormButtonsLayout {...formFields[formStep]} />
             </>
           )}
           {formStep === 2 && (
@@ -106,12 +106,10 @@ const MultiStepForm: React.FC = () => {
               {loading ? (
                 <>
                   <LoadingSkeleton />
-                  <FormButtonsLayout {...formFields[formStep]} />
                 </>
               ) : (
                 <>
                   <UploadFileStep />
-                  <FormButtonsLayout {...formFields[formStep]} />
                 </>
               )}
             </>
@@ -119,13 +117,9 @@ const MultiStepForm: React.FC = () => {
           {formStep === 3 && (
             <>
               <DisplayDataStep />
-              <FormButtonsLayout {...formFields[formStep]} />
             </>
           )}
         </FormStructure>
-      </div>
-      <div className="basis-4/12">
-        <InstructionLayout />
       </div>
     </div>
   );

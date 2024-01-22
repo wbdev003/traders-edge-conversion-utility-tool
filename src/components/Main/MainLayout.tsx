@@ -11,8 +11,8 @@ const MainLayout = () => {
   return (
     <div className="bg-slate-200 min-h-screen h-full pb-36 ">
       <Nav />
-      <SubHeader />
-      <Divider width="1" />
+      {/* <SubHeader />
+      <Divider width="1" /> */}
       <ProgressBarLayout />
       <Container>
         <MultiStepFormLayout />
