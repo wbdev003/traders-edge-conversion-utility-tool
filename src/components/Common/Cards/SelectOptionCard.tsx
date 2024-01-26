@@ -40,7 +40,7 @@ export function SelectOptionCard({
       isPressable
     >
       <div className=" h-fit flex items-center justify-center mx-auto">
-        <Image src={img} width={42} height={42} alt="broker-logo" />
+        <Image src={img} width={45} height={45} alt="broker-logo" />
       </div>
       <CardBody className="mt-0 pt-0 w-44 h-25  mx-auto">
         <p className="font-semibold text-md text-center">{title}</p>
