@@ -59,7 +59,7 @@ const DownloadCSVButton = ({ data, fileName }: DownloadCSVButtonProps) => {
           className="bg-slate-700 m-0 p-0 px-2 pr-4 pl-5 w-fit text-slate-200 rounded-full"
           onClick={handleDownload}
         >
-          <p className="pr-1 text-lg">Download CSV</p>
+          <p className="pr-1 text-md">Download CSV</p>
           <Icons type="download" size={20} color="white"></Icons>
         </Button>
       ) : (
@@ -68,7 +68,7 @@ const DownloadCSVButton = ({ data, fileName }: DownloadCSVButtonProps) => {
           className="bg-slate-700 m-0 p-0 px-2 pr-4 pl-5 w-fit text-slate-200 rounded-full"
         >
           <Loader2 className="mr-2 h-4 w-4 animate-spin" />
-          <p className="text-lg">Please wait</p>
+          <p className="text-md">Please wait</p>
         </Button>
       )}
     </>

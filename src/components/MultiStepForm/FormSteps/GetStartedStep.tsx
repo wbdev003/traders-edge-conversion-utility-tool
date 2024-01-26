@@ -1,5 +1,6 @@
 import React from "react";
 import { Separator } from "@/components/ui/separator";
+import { Spinner } from "@nextui-org/react";
 
 const GetStartedStep = () => {
   return (
@@ -20,7 +21,6 @@ const GetStartedStep = () => {
           <span className="font-semibold">&ldquo;Get Started.&rdquo;</span> to
           begin the conversion process.
         </li>
-        {/* Add more list items for additional steps if needed */}
       </ul>
     </div>
   );

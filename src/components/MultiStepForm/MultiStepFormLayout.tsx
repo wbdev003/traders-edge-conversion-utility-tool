@@ -13,20 +13,19 @@ import useToggleModal from "@/hooks/useToggleModal";
 import { FormFields } from "@/models/clientModels";
 import { convertTradeData } from "@/helpers/apiClient/apiClient";
 import { useLoadingStore } from "@/store/useLoadingStore";
-import LoadingSkeleton from "./FormSteps/Loading/LoadingSkeleton";
+import LoadingSpinner from "./FormSteps/Loading/LoadingSpinner";
 import { useToast } from "../ui/use-toast";
 import InstructionLayout from "./Instruction/InstructionLayout";
+import { useEffect, useState } from "react";
 
 const MultiStepForm: React.FC = () => {
   const { brokerIndex, brokerSelection } = useSelectionStore();
   const { formStep, setFormStep } = useFormStepStore();
-  const { fileData, fileDetails, setProcessedData, processedData } =
-    useFileUploadStore();
+  const { fileData, fileDetails, setProcessedData } = useFileUploadStore();
   const { loading, setLoading } = useLoadingStore();
+  const { toast } = useToast();
   const notSaved = true;
   useLeavePageWarning(notSaved);
-  const { toast } = useToast();
-
   const formFields: Record<number, FormFields> = {
     1: {
       disabledCondition: brokerIndex === null,
@@ -51,11 +50,9 @@ const MultiStepForm: React.FC = () => {
       btn2Function: async () => {
         try {
           setLoading(true);
-
           // Assuming convertTradeData returns a Promise
           let data = await convertTradeData(fileData, brokerSelection);
           setProcessedData(data);
-
           // Wait for the data processing to complete before moving to the next step
           setFormStep(formStep + 1);
         } catch (error) {
@@ -96,29 +93,10 @@ const MultiStepForm: React.FC = () => {
           title={formFields[formStep].title}
           description={formFields[formStep].description}
         >
-          {formStep === 1 && (
-            <>
-              <SelectBrokerStep />
-            </>
-          )}
-          {formStep === 2 && (
-            <>
-              {loading ? (
-                <>
-                  <LoadingSkeleton />
-                </>
-              ) : (
-                <>
-                  <UploadFileStep />
-                </>
-              )}
-            </>
-          )}
-          {formStep === 3 && (
-            <>
-              <DisplayDataStep />
-            </>
-          )}
+          {formStep === 1 && <SelectBrokerStep />}
+          {formStep === 2 &&
+            (loading ? <LoadingSpinner /> : <UploadFileStep />)}
+          {formStep === 3 && <DisplayDataStep />}
         </FormStructure>
       </div>
     </div>

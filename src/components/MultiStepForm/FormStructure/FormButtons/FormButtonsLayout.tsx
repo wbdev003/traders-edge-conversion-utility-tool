@@ -42,7 +42,7 @@ const FormButtonsLayout = ({
           }}
         >
           <Icons type="back" size={20} color="#334155" />
-          <p className="pl-1 text-lg">{btn1Title}</p>
+          <p className="pl-1 text-md">{btn1Title}</p>
         </Button>
       )}
       {/* if Is disabled */}
@@ -55,7 +55,7 @@ const FormButtonsLayout = ({
               btn2Function();
             }}
           >
-            <p className="text-lg">{btn2Title}</p>
+            <p className="text-md">{btn2Title}</p>
             <Icons type="next" size={25} color="white" />
           </Button>
         ) : (
@@ -65,7 +65,7 @@ const FormButtonsLayout = ({
               btn2Function();
             }}
           >
-            <p className="text-lg">{btn2Title}</p>
+            <p className="text-md">{btn2Title}</p>
             <Icons type="next" size={25} color="white" />
           </Button>
         ))}

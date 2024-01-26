@@ -38,7 +38,7 @@ const InstructionContent = () => {
           Instructions
         </h2>
       </div>
-      <div className="space-y-4 pt-6 h-96 overflow-y-scroll">
+      <div className="space-y-4 pt-6 ">
         {steps.map((step, index) => (
           <div className="w-full mx-auto text-slate-500" key={index}>
             <strong className="text-md md:text-md text-slate-500">{`Step ${
@@ -53,8 +53,7 @@ const InstructionContent = () => {
             </ul>
           </div>
         ))}
-
-        <div className=" mx-auto py-3 px-5 bg-slate-200 rounded-lg ">
+        <div className=" mx-auto py-3 px-5 bg-slate-200 rounded-lg">
           <strong>Support:</strong> For any issues or questions, consult the
           tool&apos;s documentation or reach out to our support team at:
           <Link href={`mailto:${supportEmail}`}>
