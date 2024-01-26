@@ -6,6 +6,7 @@ import {
   IoIosCloudUpload,
   IoIosHelp,
 } from "react-icons/io";
+import { FaCheckCircle, FaEdit } from "react-icons/fa";
 
 interface IIcons {
   type: string;
@@ -18,6 +19,7 @@ const Icons = ({ type, size, color }: IIcons) => {
     <div className="text-white">
       {
         {
+          check: <FaCheckCircle size={size} color={color} />,
           help: <IoIosHelp size={size} color={color} />,
           back: <IoIosArrowBack size={size} color={color} />,
           upload: <IoIosCloudUpload size={size} color={color} />,

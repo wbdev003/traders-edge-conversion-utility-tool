@@ -6,10 +6,6 @@ import { useFileUploadStore } from "@/store/useFileUploadStore";
 const FileConvertLayout = () => {
   const { processedData } = useFileUploadStore();
 
-  useEffect(() => {
-    console.log(processedData);
-  }, []);
-
   return (
     <div>
       <TableDisplay data={processedData} />

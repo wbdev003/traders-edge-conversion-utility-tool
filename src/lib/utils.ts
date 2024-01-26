@@ -34,3 +34,42 @@ export const standardizeDate = (dateString: string): string => {
     return isoDate;
   }
 };
+
+export const checkCSVForMissingFields = (csvData: string[][]) => {
+  // Assuming the first row contains header names
+  const header = csvData[0];
+
+  // Array to store missing fields for each row
+  const missingFields = [];
+
+  // Check each row starting from the second row (index 1)
+  for (let rowIndex = 1; rowIndex < csvData.length; rowIndex++) {
+    const row = csvData[rowIndex];
+
+    // Array to store missing fields for the current row
+    const missingFieldsForRow = [];
+
+    // Check each field in the row
+    for (let columnIndex = 0; columnIndex < header.length; columnIndex++) {
+      const fieldName = header[columnIndex];
+
+      // Check if the field is missing
+      if (row[columnIndex] === undefined || row[columnIndex] === "") {
+        missingFieldsForRow.push(fieldName);
+      }
+    }
+
+    // If there are missing fields for the current row, add them to the result
+    if (missingFieldsForRow.length > 0) {
+      missingFields.push({
+        row: rowIndex + 1, // Adding 1 to convert to 1-based index
+        fields: missingFieldsForRow,
+      });
+    }
+  }
+
+  // Return the result
+  return missingFields.length > 0
+    ? { hasMissingFields: true, missingFields }
+    : { hasMissingFields: false };
+};

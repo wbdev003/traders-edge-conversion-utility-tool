@@ -1,4 +1,4 @@
-// Import necessary components from the UI library
+import { useState, useEffect } from "react";
 import {
   Table,
   TableBody,
@@ -7,22 +7,60 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
-import { formatNumber, standardizeDate } from "@/lib/utils";
+import { checkCSVForMissingFields } from "@/lib/utils";
+import { useErrorStore } from "@/store/useErrorState";
+import EditableCell from "@/components/Common/Table/EditableCell";
+import { useToast } from "@/components/ui/use-toast";
 
-// Define the props for the FileConvertTableDisplay component
 interface FileConvertTableDisplayProps {
   data: boolean | string[][];
 }
 
-// Functional component to display a table based on the provided data
 const FileConvertTableDisplay = ({ data }: FileConvertTableDisplayProps) => {
-  // Check if data is an array and contains rows; otherwise, return null
-  if (!Array.isArray(data) || data.length === 0) {
-    return null;
+  const { setIsEmptyFields } = useErrorStore();
+  const [header, ...rows] = Array.isArray(data) ? data : [];
+  const initialInputValues: string[][] = rows;
+  const [inputValues, setInputValues] =
+    useState<string[][]>(initialInputValues);
+  const { toast } = useToast();
+
+  function handleInputChange(
+    rowIndex: number,
+    cellIndex: number,
+    value: string
+  ) {
+    const updatedInputValues = [...inputValues];
+    updatedInputValues[rowIndex][cellIndex] = value;
+    setInputValues(updatedInputValues);
   }
-  // Destructure the data array into header and rows
-  const [header, ...rows] = data;
-  // Render the table structure with header, body, and footer
+
+  useEffect(() => {
+    // Check if data is an array before calling the function
+    if (Array.isArray(data)) {
+      const isEmptyFields = checkCSVForMissingFields(data);
+      if (
+        isEmptyFields !== "CSV data is empty or not in the expected format." &&
+        isEmptyFields?.hasMissingFields
+      ) {
+        setIsEmptyFields(true);
+        toast({
+          variant: "destructive",
+          title: "Missing Fields",
+          description:
+            "Fields in the table are missing. Please fill in all required values.",
+        });
+      }
+    } else {
+      toast({
+        variant: "destructive",
+        title: "Invalid data format.",
+        description:
+          "Fields in the table are invalid. Please fill in all required values.",
+      });
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [data]);
+
   return (
     <Table>
       {/* Table Header */}
@@ -42,13 +80,18 @@ const FileConvertTableDisplay = ({ data }: FileConvertTableDisplayProps) => {
             {/* Map through cell data to create formatted TableCell components */}
             {rowData.map((cellData, cellIndex) => (
               <TableCell key={cellIndex}>
-                {cellIndex === 0
-                  ? cellData
-                  : cellIndex === 1 || cellIndex === 2
-                  ? cellData
-                  : cellIndex === 9
-                  ? cellData
-                  : formatNumber(cellData)}
+                {cellData === "" ? (
+                  <EditableCell
+                    cellIndex={cellIndex}
+                    rowIndex={rowIndex}
+                    inputValues={inputValues}
+                    handleInputChange={handleInputChange}
+                    mode={cellData === ""}
+                    isEditMode={cellData === ""}
+                  />
+                ) : (
+                  cellData
+                )}
               </TableCell>
             ))}
           </TableRow>
@@ -57,5 +100,4 @@ const FileConvertTableDisplay = ({ data }: FileConvertTableDisplayProps) => {
     </Table>
   );
 };
-// Export the FileConvertTableDisplay component
 export default FileConvertTableDisplay;

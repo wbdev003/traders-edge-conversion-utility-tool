@@ -62,12 +62,7 @@ const FileUpload: React.FC<FileUploadProps> = ({ onFileDrop }) => {
     [onFileDrop, toast, setFileData, setRejected, setFileDetails]
   );
 
-  const {
-    acceptedFiles,
-    getRootProps,
-    getInputProps,
-    isDragActive,
-  }: DropzoneRootProps = useDropzone({
+  const { getRootProps, getInputProps }: DropzoneRootProps = useDropzone({
     onDrop: handleDrop,
     accept: { file: [".csv"] }, // Specify accepted file types
     maxFiles: 1, // Allow only one file
