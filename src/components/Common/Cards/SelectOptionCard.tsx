@@ -32,18 +32,18 @@ export function SelectOptionCard({
 
   return (
     <Card
-      className={`w-fit mx-auto px-4 py-2 text-center rounded-xl shadow-xl bg-slate-50
+      className={`w-fit mx-auto px-4 py-2 text-center rounded-xl shadow-xl bg-slate-50 flex items-center justify-center
         border-slate-200 border-solid border-2 ${
           brokerIndex === index ? "bg-slate-300 border-slate-400" : "bg-white"
         }`}
       onClick={handleClick}
       isPressable
     >
-      <div className=" h-36 flex items-center justify-center mx-auto">
-        <Image src={img} width={100} height={100} alt="broker-logo" />
+      <div className=" h-fit flex items-center justify-center mx-auto">
+        <Image src={img} width={42} height={42} alt="broker-logo" />
       </div>
       <CardBody className="mt-0 pt-0 w-44 h-25  mx-auto">
-        <p className="font-semibold text-lg text-center">{title}</p>
+        <p className="font-semibold text-md text-center">{title}</p>
       </CardBody>
     </Card>
   );
