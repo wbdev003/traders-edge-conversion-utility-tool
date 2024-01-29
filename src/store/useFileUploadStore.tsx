@@ -31,10 +31,6 @@ export const useFileUploadStore = create<State & Actions>((set) => ({
   setConvertedFileData: (convertedFileData: unknown[]) =>
     set({ convertedFileData: convertedFileData }),
   setProcessedData: (newProcessedData: boolean | string[][]) => {
-    if (Array.isArray(newProcessedData)) {
-      set({ processedData: newProcessedData });
-    } else {
-      console.error("Invalid newProcessedData:", newProcessedData);
-    }
+    set({ processedData: newProcessedData });
   },
 }));

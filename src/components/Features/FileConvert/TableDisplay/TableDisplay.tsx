@@ -67,7 +67,7 @@ const FileConvertTableDisplay = ({ data }: FileConvertTableDisplayProps) => {
       <TableHeader>
         <TableRow>
           {/* Map through header items to create TableHead components */}
-          {header.map((headerItem, index) => (
+          {header?.map((headerItem, index) => (
             <TableHead key={index}>{headerItem}</TableHead>
           ))}
         </TableRow>
@@ -75,10 +75,10 @@ const FileConvertTableDisplay = ({ data }: FileConvertTableDisplayProps) => {
       {/* Table Body */}
       <TableBody>
         {/* Map through rows to create TableRow components */}
-        {rows.map((rowData, rowIndex) => (
+        {rows?.map((rowData, rowIndex) => (
           <TableRow key={rowIndex}>
             {/* Map through cell data to create formatted TableCell components */}
-            {rowData.map((cellData, cellIndex) => (
+            {rowData?.map((cellData, cellIndex) => (
               <TableCell key={cellIndex}>
                 {cellData === "" ? (
                   <EditableCell
