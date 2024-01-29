@@ -6,6 +6,7 @@ import Icons from "../Icons/Icons";
 import { Button } from "@/components/ui/button";
 import { useFormStepStore } from "@/store/useFormStepStore";
 import useResetForm from "@/hooks/useResetForm";
+import { useDownloadState } from "@/store/useDownloadState";
 
 interface DownloadCSVButtonProps {
   data: boolean | string[][];
@@ -17,13 +18,20 @@ const DownloadCSVButton = ({ data, fileName }: DownloadCSVButtonProps) => {
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const { setFormStep } = useFormStepStore();
   const { resetFormState } = useResetForm();
+  const {
+    accountNumber,
+    startDate,
+    endDate,
+    setAccountNumber,
+    setStartDate,
+    setEndDate,
+  } = useDownloadState();
 
   const downloadCSV = () => {
     // Check if data is an array before attempting to unparse
     if (Array.isArray(data)) {
       const csv = Papa.unparse(data);
       setCSVData(csv);
-
       const blob = new Blob([csv], { type: "text/csv" });
       const link = document.createElement("a");
       link.href = URL.createObjectURL(blob);

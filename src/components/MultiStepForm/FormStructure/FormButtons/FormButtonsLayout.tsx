@@ -4,6 +4,7 @@ import { useFormStepStore } from "@/store/useFormStepStore";
 import Icons from "@/components/Common/Icons/Icons";
 import DownloadCSVButton from "@/components/Common/Buttons/DownloadCSVButton";
 import { useFileUploadStore } from "@/store/useFileUploadStore";
+import { useDownloadState } from "@/store/useDownloadState";
 
 interface FormButtonsLayoutProps {
   disabledCondition: boolean;
@@ -28,6 +29,14 @@ const FormButtonsLayout = ({
   /* State */
   const { formStep } = useFormStepStore();
   const { processedData } = useFileUploadStore();
+  const {
+    accountNumber,
+    startDate,
+    endDate,
+    setAccountNumber,
+    setStartDate,
+    setEndDate,
+  } = useDownloadState();
 
   return (
     <div
@@ -72,7 +81,7 @@ const FormButtonsLayout = ({
       {!displayBtn2 && (
         <DownloadCSVButton
           data={processedData}
-          fileName="traders-edge-your-converted-trade-data"
+          fileName={`${accountNumber}_trades_${startDate}-${endDate}`}
         />
       )}
     </div>
