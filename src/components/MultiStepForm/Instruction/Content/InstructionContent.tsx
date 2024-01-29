@@ -8,25 +8,24 @@ import Icons from "../../../Common/Icons/Icons";
 import { Button } from "@nextui-org/react";
 
 const InstructionContent = () => {
-  const supportEmail = "conversion@tradersedge.ca";
   // Data for each step
   const steps = [
     {
       title: "Choose Your Broker",
       content: [
-        'Select "Choose Your Broker" to specify the broker from which you are importing data. to ensure accurate data conversion for your broker.',
+        'Select "Choose Your Broker" to specify the broker from which you are importing data.',
       ],
     },
     {
       title: "Import Trade CSV File",
       content: [
-        'Select "Import Trade CSV File" to browse and upload the CSV file containing your trade history from your broker. This step will validate and process the CSV file, extracting the relevant trading information.',
+        'Select "Import Trade CSV File" to upload the CSV file containing your trade history from your broker..',
       ],
     },
     {
       title: "Review Your Trade Conversion",
       content: [
-        'Navigate to "Trade Conversion" to review the list of your trades. Verify the accuracy of the imported data, including trade details, timestamps, and any associated information and make required adjustments or corrections. Then save the file to your computer as a .csv format',
+        'Go to "Trade Conversion" to review the list of your trades. Verify the accuracy of the imported trade details and associated information, make required adjustments and save the file as a .csv format ready for Traders Edge import.',
       ],
     },
   ];
@@ -53,15 +52,6 @@ const InstructionContent = () => {
             </ul>
           </div>
         ))}
-        <div className=" mx-auto py-3 px-5 bg-slate-200 rounded-lg">
-          <strong>Support:</strong> For any issues or questions, consult the
-          tool&apos;s documentation or reach out to our support team at:
-          <Link href={`mailto:${supportEmail}`}>
-            <p className="text-slate-500 font-semibold hover:text-slate-400">
-              {supportEmail}
-            </p>
-          </Link>
-        </div>
       </div>
     </div>
   );
