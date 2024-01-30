@@ -38,7 +38,7 @@ export const standardizeDate = (dateString: string): string => {
 export const checkCSVForMissingFields = (csvData: string[][]) => {
   // Check if csvData is an array and contains rows
   if (!Array.isArray(csvData) || csvData.length === 0) {
-    return "CSV data is empty or not in the expected format.";
+    console.log("CSV data is empty or not in the expected format.");
   }
 
   // Assuming the first row contains header names

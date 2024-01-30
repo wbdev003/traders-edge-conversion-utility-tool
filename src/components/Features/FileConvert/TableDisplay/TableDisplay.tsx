@@ -38,10 +38,7 @@ const FileConvertTableDisplay = ({ data }: FileConvertTableDisplayProps) => {
     // Check if data is an array before calling the function
     if (Array.isArray(data)) {
       const isEmptyFields = checkCSVForMissingFields(data);
-      if (
-        isEmptyFields !== "CSV data is empty or not in the expected format." &&
-        isEmptyFields?.hasMissingFields
-      ) {
+      if (isEmptyFields?.hasMissingFields) {
         setIsEmptyFields(true);
         toast({
           variant: "destructive",

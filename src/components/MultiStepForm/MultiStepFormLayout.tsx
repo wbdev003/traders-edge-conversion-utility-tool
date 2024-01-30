@@ -26,6 +26,7 @@ const MultiStepForm: React.FC = () => {
   const { toast } = useToast();
   const notSaved = true;
   useLeavePageWarning(notSaved);
+
   const formFields: Record<number, FormFields> = {
     1: {
       disabledCondition: brokerIndex === null,

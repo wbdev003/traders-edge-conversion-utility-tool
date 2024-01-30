@@ -1,12 +1,15 @@
 "use client";
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import TableDisplay from "./TableDisplay/TableDisplay";
 import { useFileUploadStore } from "@/store/useFileUploadStore";
 import { useDownloadState } from "@/store/useDownloadState";
+import { fetchStockInfo } from "@/apiClient/fetchData";
+import useSWR from "swr";
 
 const FileConvertLayout = () => {
   const { processedData } = useFileUploadStore();
   const { setAccountNumber, setEndDate, setStartDate } = useDownloadState();
+  let missingInfo = [];
 
   /* Setting state for download file name */
   useEffect(() => {
@@ -21,6 +24,21 @@ const FileConvertLayout = () => {
       );
     }
   }, []);
+
+  // Fetch Journal Data
+  const { data, error, isLoading } = useSWR(
+    `${process.env.NEXT_PUBLIC_API_URL}`,
+    () => fetchStockInfo("Apple"),
+    {
+      revalidateOnFocus: false,
+      refreshInterval: 0,
+      focusThrottleInterval: 60000,
+    }
+  );
+
+  useEffect(() => {
+    console.log(data);
+  }, [data]);
 
   return (
     <div>

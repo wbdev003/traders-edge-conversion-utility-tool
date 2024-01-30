@@ -23,3 +23,5 @@ export interface FormFields {
   displayBtn2?: boolean;
   btn2Function: () => void;
 }
+
+export interface TradeData {}

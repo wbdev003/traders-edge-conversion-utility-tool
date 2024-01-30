@@ -7,55 +7,76 @@ import { mapToProperFormat } from "../brokerhelpers";
  */
 export function tdTradeFilter(data: any): Array<Array<string>> {
   const final: Array<Array<string>> = [];
-  let lastCharInAccount = data[1][1]
-    .split(" ")[4]
-    .charAt(data[1][1].split(" ")[4].length - 1);
   let accountNum = data[1][1].split(" - ")[1];
 
   for (let i = 4; i < data.length; i++) {
     let startDate = data[i][0]; // Start date is at index 0
     let endDate = data[i][1]; // End date is at index 1
+
+    let teType = data[i][3];
+    let numUnits = data[i][4];
+    let amount = data[i][7];
+
+    // TODO create logic in that if security name and/or Exchange and/or Symbol is empty
+    // make a request to ... to get data via a fetch req from EO HD API
+
     let temp = [];
+
     for (let j = 0; j < data[i].length; j++) {
+      let securityName = data[i][2];
+      let symbol = "";
+      let exchange = "";
+
       if (j === 0) {
         temp.push(accountNum);
       } else if (j === 1) {
         temp.push(startDate);
       } else if (j === 2) {
         temp.push(endDate);
+      } else if (j === 11) {
+        temp.push(securityName);
+      } else if (j === 12) {
+        // Adjusted for correct mapping
+        temp.push(" "); // Assuming you want to skip Exchange
       } else if (j === 3) {
-        if (data[i][j] === "SELL") {
-          temp.push("Sell");
-          temp.push(data[i][j]);
-        } else if (data[i][j] === "BUY") {
-          temp.push("Buy");
-          temp.push(data[i][j]);
+        // Adjusted for correct mapping
+        let filteredSecurity = filterDescriptionTD(securityName);
+        if (!filteredSecurity) {
+          temp.push("N/A");
         } else {
-          temp.push("unallocated");
-          temp.push(data[i][j]);
+          temp.push(filteredSecurity);
         }
       } else if (j === 4) {
-        temp.push(Math.abs(data[i][j]));
-      } else if (j === 5) {
-        if (data[i][4] === 0) {
-          temp.push(0);
+        if (teType === "BUY") {
+          temp.push("Buy");
+        } else if (teType === "SELL") {
+          temp.push("Sell");
         } else {
-          const pricePerQuantity = Math.abs(data[i][5]);
-          temp.push(pricePerQuantity.toFixed(2));
+          temp.push("unallocated");
         }
+      } else if (j === 5) {
+        temp.push(teType); // Assuming Broker Type here
       } else if (j === 6) {
-        temp.push(data[i][j] ? parseInt(data[i][j]) : 0);
+        if (data[i][4] === 0) {
+          temp.push("0");
+        } else {
+          const pricePerQuantity = Math.abs(data[i][4]);
+          temp.push(pricePerQuantity.toFixed(0));
+        }
       } else if (j === 7) {
-        temp.push(Math.abs(data[i][j]));
+        let pricePerUnit =
+          numUnits !== 0
+            ? Math.abs(Math.abs(amount) / numUnits).toFixed(4)
+            : "0";
+        temp.push(pricePerUnit);
+      } else if (j === 8) {
+        temp.push(Math.abs(amount));
       } else {
         temp.push(data[i][j]);
       }
     }
 
-    temp.push("");
-    temp.push("");
     if (data[i][0]) {
-      console.log(temp);
       temp.push(filterDescriptionTD(data[i][2]));
       final.push(temp);
     }
@@ -65,14 +86,14 @@ export function tdTradeFilter(data: any): Array<Array<string>> {
     0: 0, // Account #
     1: 1, // Trade Date
     2: 2, // Settlement Date
-    3: 3, // Symbol
-    4: 4, // Exchange
-    5: 5, // Security Name
-    6: 6, // TE Type
-    7: 7, // Broker Type
-    8: 8, // #units
-    9: 9, // $price/unit
-    10: 10, // Amount
+    11: 3, // Symbol
+    12: 4, // Exchange
+    3: 5, // Security Name
+    4: 6, // TE Type
+    5: 7, // Broker Type
+    6: 8, // #units
+    7: 9, // $price/unit
+    8: 10, // Amount
   });
 }
 
