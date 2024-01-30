@@ -9,7 +9,6 @@ import useSWR from "swr";
 const FileConvertLayout = () => {
   const { processedData } = useFileUploadStore();
   const { setAccountNumber, setEndDate, setStartDate } = useDownloadState();
-  let missingInfo = [];
 
   /* Setting state for download file name */
   useEffect(() => {
@@ -22,13 +21,13 @@ const FileConvertLayout = () => {
       console.error(
         "Invalid data format: processedData is not an array with at least two elements."
       );
-    }
+    } // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   // Fetch Journal Data
-  const { data, error, isLoading } = useSWR(
+  /* const { data, error, isLoading } = useSWR(
     `${process.env.NEXT_PUBLIC_API_URL}`,
-    () => fetchStockInfo("Apple"),
+    () => fetchStockInfo("GATEKEEPER SYSTEMS INC"),
     {
       revalidateOnFocus: false,
       refreshInterval: 0,
@@ -38,7 +37,7 @@ const FileConvertLayout = () => {
 
   useEffect(() => {
     console.log(data);
-  }, [data]);
+  }, [data]); */
 
   return (
     <div>

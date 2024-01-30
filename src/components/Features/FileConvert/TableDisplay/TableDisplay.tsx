@@ -11,6 +11,7 @@ import { checkCSVForMissingFields } from "@/lib/utils";
 import { useErrorStore } from "@/store/useErrorState";
 import EditableCell from "@/components/Common/Table/EditableCell";
 import { useToast } from "@/components/ui/use-toast";
+import { fetchStockInfo } from "@/apiClient/fetchData";
 
 interface FileConvertTableDisplayProps {
   data: boolean | string[][];
@@ -23,6 +24,21 @@ const FileConvertTableDisplay = ({ data }: FileConvertTableDisplayProps) => {
   const [inputValues, setInputValues] =
     useState<string[][]>(initialInputValues);
   const { toast } = useToast();
+
+  const fetchMissingData = async () => {
+    // Identify missing data from the CSV
+    const missingDataIndexes: number[] = [];
+
+    inputValues.forEach((row, rowIndex) => {
+      row.forEach((cell, cellIndex) => {
+        if (cell === "") {
+          missingDataIndexes.push(rowIndex);
+        }
+      });
+    });
+
+    console.log(missingDataIndexes);
+  };
 
   function handleInputChange(
     rowIndex: number,
@@ -46,6 +62,8 @@ const FileConvertTableDisplay = ({ data }: FileConvertTableDisplayProps) => {
           description:
             "Fields in the table are missing. Please fill in all required values.",
         });
+        // Fetch missing data and update the table
+        fetchMissingData();
       }
     } else {
       toast({
