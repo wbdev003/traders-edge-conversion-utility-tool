@@ -1,4 +1,9 @@
 import { mapToProperFormat } from "../brokerhelpers";
+import {
+  mapTransactionType,
+  mapToStockExchange,
+} from "@/helpers/stockHelpers/stockHelpers";
+
 /**
  * Filters data for RBC type.
  * @param {any} data - Data array to filter.
@@ -11,6 +16,8 @@ export function scotiaTradeFilter(data: any): Array<Array<string>> {
   // Implementation for Scotia filtering
   for (let i = 1; i < data.length; i++) {
     const temp: Array<string> = [];
+
+    let currency = data[1][4];
 
     for (let j = 0; j < data[i].length; j++) {
       // Looks through every column by index and changes it based on requirements
@@ -53,18 +60,32 @@ export function scotiaTradeFilter(data: any): Array<Array<string>> {
       } else {
         temp.push(data[i][j]);
       } */
-      if (j === 5) {
+      if (j === 0) {
+        temp.push(data[i][j].split(" ").slice(0, 4).join(" "));
+      } else if (j === 4) {
+        temp.push(mapTransactionType(data[i][5]));
+      } else if (j === 5) {
         temp.push(data[i][j]);
       } else if (j === 6) {
-        temp.push(data[i][5]);
+        temp.push(String(Math.abs(data[i][j])));
       } else if (j === 9) {
         temp.push(String(Math.abs(data[i][9])));
+      } else if (j === 10) {
+        temp.push(data[i][5]);
+      } else if (j === 11) {
+        temp.push(mapTransactionType(data[i][j]));
       } else {
         temp.push(data[i][j]);
       }
     }
 
     if (data[i][0]) {
+      const exchangeIndex = 11;
+      if (currency === "USD") {
+        temp[exchangeIndex] = mapToStockExchange("US");
+      } else if (currency === "CAD") {
+        temp[exchangeIndex] = mapToStockExchange("TO");
+      }
       temp.push(data[i][4].split(" COM ")[0]);
       final.push(temp);
     }
@@ -72,16 +93,16 @@ export function scotiaTradeFilter(data: any): Array<Array<string>> {
   // left is representing the array csv - non-zero indexed
   // right is representing the position in the table - zero indexed
   return mapToProperFormat(final, {
-    13: 0,
-    2: 1,
-    3: 2,
-    1: 3,
-    14: 4,
-    0: 5,
-    5: 6,
-    6: 7,
-    7: 8,
-    9: 9,
-    10: 10,
+    14: 0, // Account #
+    2: 1, // Trade Date
+    3: 2, // Settlement Date
+    1: 3, // Symbol
+    11: 4, // Exchange
+    0: 5, // Security Name
+    4: 6, // TE Type
+    5: 7, // Broker Type
+    6: 8, // #units
+    8: 9, // $price/unit
+    9: 10, // Amount
   });
 }

@@ -47,7 +47,15 @@ const FileConvertTableDisplay = ({ data }: FileConvertTableDisplayProps) => {
     value: string
   ) {
     const updatedInputValues = [...inputValues];
+
+    // Update the changed cell
     updatedInputValues[rowIndex][cellIndex] = value;
+
+    // Fill all cells below the changed cell with the same value
+    for (let i = rowIndex + 1; i < updatedInputValues.length; i++) {
+      updatedInputValues[i][cellIndex] = value;
+    }
+
     setInputValues(updatedInputValues);
   }
 

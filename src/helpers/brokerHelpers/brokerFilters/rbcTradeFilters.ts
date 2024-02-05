@@ -105,11 +105,13 @@ import {
         .join(" ");
       const teType = temp[1];
 
+      // check the csv for the currency to avoid making unesecary api calls to EOD
       if (currency === "USD") {
         temp[exchangeIndex] = mapToStockExchange("US");
       } else if (currency === "CAN") {
         temp[exchangeIndex] = mapToStockExchange("TO");
       } else {
+        // if there is none make request to EOD api to fill in data
         try {
           if (securityName && (teType === "Buy" || teType === "Sell")) {
             const eodData = await fetchEODData(symbol || securityName);
