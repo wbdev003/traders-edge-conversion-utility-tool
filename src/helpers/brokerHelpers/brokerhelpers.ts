@@ -6,6 +6,7 @@ import { scotiaTradeFilter } from "./brokerFilters/scotiaTradeFilters";
 import { vbTradeFilter } from "./brokerFilters/vbTradeFilter";
 import { cibcTradeFilter } from "./brokerFilters/cibcTradeFilters";
 import { nationalMultiTradeFilter } from "./brokerFilters/nationalMultiTradeFilter";
+import { fetchEODData } from "../stockHelpers/stockHelpers";
 
 // Define a variable to hold the selected type (questrade, TD, RBC)
 export const header = [
@@ -127,7 +128,9 @@ export async function errorCasePromise(
         "Net Amount",
       ])
     ) {
-      return tdTradeFilter(args);
+      let res = tdTradeFilter(args);
+
+      return res;
     } else {
       return false;
     }
@@ -264,80 +267,6 @@ export async function errorCasePromise(
       return false;
     }
   } else {
-    console.log("not equal");
-    return false;
-  }
-}
-
-export function errorCase(
-  args: any,
-  selectedBroker: string
-): boolean | string[][] {
-  // Add if statements for new types in error cases here
-
-  // Questrade
-  if (selectedBroker === "questrade") {
-    if (
-      checkArrayEqual(args[0], [
-        "Transaction Date",
-        "Settlement Date",
-        "Action",
-        "Symbol",
-        "Description",
-        "Quantity",
-        "Price",
-        "Gross Amount",
-        "Commission",
-        "Net Amount",
-        "Currency",
-        "Account #",
-        "Activity Type",
-        "Account Type",
-      ])
-    ) {
-      return questTradeFilter(args);
-    } else {
-      return false;
-    }
-  } else if (selectedBroker === "td") {
-    if (
-      checkArrayEqual(args[3], [
-        "Trade Date",
-        "Settle Date",
-        "Description",
-        "Action",
-        "Quantity",
-        "Price",
-        "Commission",
-        "Net Amount",
-      ])
-    ) {
-      return tdTradeFilter(args);
-    } else {
-      return false;
-    }
-  } else if (selectedBroker === "rbc") {
-    if (
-      checkArrayEqual(args[8], [
-        "Date",
-        "Activity",
-        "Symbol",
-        "Symbol Description",
-        "Quantity",
-        "Price",
-        "Settlement Date",
-        "Account",
-        "Value",
-        "Currency",
-        "Description",
-      ])
-    ) {
-      return rbcTradeFilter(args);
-    } else {
-      return false;
-    }
-  } else {
-    // Case when nothing is selected
     console.log("not equal");
     return false;
   }
