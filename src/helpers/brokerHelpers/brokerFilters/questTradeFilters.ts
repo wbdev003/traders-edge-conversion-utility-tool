@@ -1,11 +1,13 @@
 import { mapToProperFormat } from "../brokerhelpers";
-
+import { fetchEODData } from "@/helpers/stockHelpers/stockHelpers";
 /**
  * Filters data for Questrade type.
  * @param {any} data - Data array to filter.
  * @returns {Array<Array<string>>} - Array of filtered data if successful, an empty array otherwise.
  */
-export function questTradeFilter(data: any): Array<Array<string>> {
+export async function questTradeFilter(
+  data: any
+): Promise<Array<Array<string>>> {
   const final: Array<Array<string>> = [];
 
   for (let i = 1; i < data.length; i++) {
@@ -57,6 +59,47 @@ export function questTradeFilter(data: any): Array<Array<string>> {
 
     if (data[i][0]) {
       temp.push(data[i][4].split(" COM ")[0]);
+      final.push(temp);
+    }
+
+    if (data[i][0]) {
+      // Fetch additional data if Symbol or Security name is present
+      const symbolIndex = 11;
+      const exchangeIndex = 12;
+      const securityNameIndex = 3;
+
+      const symbol = temp[symbolIndex];
+      const securityName = temp[securityNameIndex]
+        .split(" ")
+        .slice(0, 2)
+        .join(" ");
+      const teType = temp[4];
+
+      try {
+        if (
+          (symbol || securityName) &&
+          (teType === "Buy" || teType === "Sell")
+        ) {
+          const eodData = await fetchEODData(symbol || securityName);
+
+          console.log(eodData);
+
+          // Update the temp array with additional information
+          if (symbol) {
+            // fill in exchange index with fetched data
+            temp[exchangeIndex] = eodData[0].Exchange; // fill in exchange
+            temp[securityNameIndex] = eodData[0].Name; // fill in Security Name
+          } else if (securityName) {
+            temp[symbolIndex] = eodData[0].Code; // fill in symbol
+            temp[exchangeIndex] = eodData[0].Exchange; // fill in exchange
+          }
+        }
+      } catch (error) {
+        // Handle errors or log them as needed
+        console.error("Error fetching EOD data:", error);
+        throw error;
+      }
+
       final.push(temp);
     }
   } // Converts all of the important columns into proper format
