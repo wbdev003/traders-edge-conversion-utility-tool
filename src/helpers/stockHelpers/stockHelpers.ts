@@ -1,7 +1,7 @@
 import axios from "axios";
 
 export async function fetchEODData(queryString: string): Promise<any> {
-  const apiUrl = `https://eodhd.com/api/search/${queryString}?api_token=${process.env.NEXT_PUBLIC_EOD_API_KEY}&fmt=json`;
+  const apiUrl = `https://eodhd.com/api/search/${queryString}?limit=1&api_token=${process.env.NEXT_PUBLIC_EOD_API_KEY}&fmt=json`;
 
   try {
     const response = await axios.get(apiUrl);
@@ -17,10 +17,12 @@ export function mapToStockExchange(input: string): string {
     TO: "TSX",
     V: "TSXV",
     US: "NASDAQ",
+    USA: "NASDAQ",
+    F: "FWB",
     // Add more mappings as needed
   };
 
-  const result = stockExchangeMap[input.toUpperCase()] || "other"; // Default to 'Unknown' if not found
+  const result = stockExchangeMap[input?.toUpperCase()] || "other"; // Default to 'Unknown' if not found
   return result;
 }
 
@@ -31,6 +33,6 @@ export function mapTransactionType(teType: string): string {
     // Add more mappings as needed
   };
 
-  const result = transactionTypeMap[teType.toUpperCase()] || "Unallocated"; // Default to 'Unallocated' if not found
+  const result = transactionTypeMap[teType?.toUpperCase()] || "unallocated"; // Default to 'Unallocated' if not found
   return result;
 }
