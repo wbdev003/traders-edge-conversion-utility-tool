@@ -13,7 +13,6 @@ import {
   data: any[]
 ): Promise<Array<Array<string>>> {
   let dataReal: any[] = [];
-  let currency = data[9][9];
 
   for (let i = 9; i < data.length; i++) {
     let trueValue: string = "";
@@ -50,7 +49,8 @@ import {
 
   for (let i = 0; i < data.length; i++) {
     let temp: any[] = [];
-
+    let currency = data[i][9];
+    console.log(currency);
     for (let j = 0; j < data[i].length; j++) {
       if (j === 0) {
         temp.push(data[i][j]);
