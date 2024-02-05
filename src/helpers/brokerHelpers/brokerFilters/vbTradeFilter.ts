@@ -1,4 +1,9 @@
 import { mapToProperFormat } from "../brokerhelpers";
+import {
+  mapToStockExchange,
+  mapTransactionType,
+} from "@/helpers/stockHelpers/stockHelpers";
+
 /**
  * Filters data for RBC type.
  * @param {any} data - Data array to filter.
@@ -11,21 +16,66 @@ export function vbTradeFilter(data: any): Array<Array<string>> {
   // Implementation for Scotia filtering
   for (let i = 1; i < data.length; i++) {
     const temp: Array<string> = [];
+    let market = data[i][9];
+    console.log(market);
 
     for (let j = 0; j < data[i].length; j++) {
       // Looks through every column by index and changes it based on requirements
-      if (j === 10) {
+      if (j === 1) {
+        temp.push(data[i][j]);
+      } else if (j === 4) {
+        temp.push(mapTransactionType(data[i][j]));
+      } else if (j === 5) {
+        let symbol = data[i][j];
+        if (!symbol) {
+          temp.push("n/a");
+        } else {
+          temp.push(symbol);
+        }
+      } else if (j === 9) {
+        temp.push(data[i][4]);
+      } else if (j === 10) {
+        // # Units
         temp.push(`${Math.trunc(data[i][j])}`);
       } else if (j === 11) {
-        let calc = data[i][13] / data[i][10];
-        console.log(data[i][10]);
-        temp.push(String(Math.abs(calc)));
+        // Extract and convert numerator from data array
+        const numeratorConverted = parseFloat(data[i][13].replace(/[$,]/g, ""));
+
+        // Extract denominator from data array
+        const denominator = +data[i][10];
+
+        // Check if denominator or numeratorConverted is zero to avoid division by zero
+        const result =
+          denominator === 0 || numeratorConverted === 0
+            ? "0" // If either is zero, set result to "n/a"
+            : String(
+                Math.abs(Number((numeratorConverted / denominator).toFixed(2)))
+              );
+
+        // Push the result into the temp array
+        temp.push(result);
+      } else if (j === 13) {
+        // Amount
+        const numberConverted = Math.abs(
+          parseFloat(data[i][j].replace(/[$,]/g, ""))
+        );
+        temp.push(String(numberConverted));
+      } else if (j === 14) {
       } else {
         temp.push(data[i][j]);
       }
     }
 
     if (data[i][0]) {
+      const exchangeIndex = 14;
+
+      if (market === "USD") {
+        temp[exchangeIndex] = mapToStockExchange("US");
+      } else if (market === "CAD") {
+        temp[exchangeIndex] = mapToStockExchange("TO");
+      } else {
+        temp[exchangeIndex] = mapToStockExchange(market);
+      }
       temp.push(data[i][4].split(" COM ")[0]);
       final.push(temp);
     }
@@ -38,12 +88,12 @@ export function vbTradeFilter(data: any): Array<Array<string>> {
     1: 1, // trade date
     2: 2, // settlement date
     5: 3, //symbol
-    24: 4, // exchange
-    224: 5, // security name
-    25: 6, // ty type
-    47: 7, // broker type
-    11: 8, //#units
-    12: 9, // #price unit
-    14: 10, // amount
+    14: 4, // exchange
+    3: 5, // security name
+    4: 6, // te type
+    9: 7, // broker type
+    10: 8, //#units
+    11: 9, // #price unit
+    13: 10, // amount
   });
 }

@@ -9,7 +9,7 @@ import InstructionModal from "../Common/Modal/InstructionModal";
 
 const MainLayout = () => {
   return (
-    <div className="bg-slate-200 min-h-screen h-full pb-36 ">
+    <div className="bg-slate-200 min-h-screen h-full overflow-auto">
       <Nav />
       {/* <SubHeader />
       <Divider width="1" /> */}

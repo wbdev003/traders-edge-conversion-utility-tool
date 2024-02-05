@@ -16,11 +16,7 @@ const brokerData = [
   { img: rbcLogo, title: "RBC Direct Investing", identifier: "rbc" },
 
   { img: ibLogo, title: "Interactive Brokers", identifier: "ib" },
-  {
-    img: bmoLogo,
-    title: "BMO InvestorLine",
-    identifier: "bmo",
-  },
+
   { img: scotiaItradeLogo, title: "Scotia ITrade", identifier: "scotia" },
   { img: vbLogo, title: "Virtual Brokers", identifier: "vb" },
   { img: cibcLogo, title: "CIBC Investor's Edge", identifier: "cibc" },
@@ -29,6 +25,11 @@ const brokerData = [
     title: "National Bank",
     identifier: "nationalMulti",
   },
+  /* {
+    img: bmoLogo,
+    title: "BMO InvestorLine",
+    identifier: "bmo",
+  }, */
 ];
 const SelectBrokerStep = () => {
   return (
