@@ -11,8 +11,6 @@ const MainLayout = () => {
   return (
     <div className="bg-slate-200 min-h-screen h-full overflow-auto">
       <Nav />
-      {/* <SubHeader />
-      <Divider width="1" /> */}
       <ProgressBarLayout />
       <Container>
         <MultiStepFormLayout />
