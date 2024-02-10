@@ -51,7 +51,7 @@ const FormButtonsLayout = ({
           }}
         >
           <Icons type="back" size={20} color="#334155" />
-          <p className="pl-1 text-md">{btn1Title}</p>
+          <p className="pl-1 text-base font-semibold">{btn1Title}</p>
         </Button>
       )}
       {/* if Is disabled */}
@@ -59,7 +59,7 @@ const FormButtonsLayout = ({
         (disabledCondition ? (
           <Button
             disabled
-            className="flex m-0 w-fit p-0 px-2 pl-5 bg-blue-500 hover:bg-blue-500 rounded-full"
+            className="flex m-0 w-fit p-0 px-2 pl-5 bg-blue-400 hover:bg-blue-500 rounded-full"
             onClick={() => {
               btn2Function();
             }}
