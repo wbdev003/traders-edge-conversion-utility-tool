@@ -30,8 +30,8 @@ const MultiStepForm: React.FC = () => {
   const formFields: Record<number, FormFields> = {
     1: {
       disabledCondition: brokerIndex === null,
-      title: "Get Started",
-      description: "Choose Your Broker",
+      title: "Choose Your Broker",
+      description: "",
       btn1Title: "Go Back",
       displayBtn1: false,
       btn2Title: "Next Step",
@@ -74,7 +74,7 @@ const MultiStepForm: React.FC = () => {
     3: {
       disabledCondition: fileData.length === 0 && fileDetails.length === 0,
       title: "Your Processed Trades",
-      description: "Your processed trades are ready for download.",
+      description: "Your processed trades are ready for download",
       btn1Title: "Go Back",
       displayBtn1: true,
       btn2Title: "Download CSV",

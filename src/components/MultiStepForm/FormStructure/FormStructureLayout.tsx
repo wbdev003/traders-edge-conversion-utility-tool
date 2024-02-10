@@ -26,7 +26,8 @@ const FormStructure: React.FC<FormStructureProps> = ({
         <CardTitle className="text-2xl sm:text-3xl font-semibold text-slate-700">
           {title}
         </CardTitle>
-        <CardDescription className="text-md">{description}</CardDescription>
+        {/*         <CardDescription className="text-md">{description}</CardDescription>
+         */}
       </CardHeader>
       <CardContent className="p-0 m-0 mt-4"> {children}</CardContent>
     </Card>
