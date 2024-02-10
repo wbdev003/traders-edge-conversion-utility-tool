@@ -15,7 +15,7 @@ const brokerData = [
   { img: tdLogo, title: "TD Direct Investing", identifier: "td" },
   { img: rbcLogo, title: "RBC Direct Investing", identifier: "rbc" },
 
-  { img: ibLogo, title: "Interactive Brokers", identifier: "ib" },
+  { img: ibLogo, title: "Interactive Brokers", identifier: "ibkr" },
 
   { img: scotiaItradeLogo, title: "Scotia ITrade", identifier: "scotia" },
   { img: vbLogo, title: "Virtual Brokers", identifier: "vb" },
@@ -31,7 +31,7 @@ const brokerData = [
     identifier: "bmo",
   }, */
 ];
-const SelectBrokerStep = () => {
+const ChooseBrokerStep = () => {
   return (
     <div className="mt-8 grid gap-2 gap-y-5 sm:grid-cols-2 lg:grid-cols-4">
       {brokerData.map((broker, index) => (
@@ -47,4 +47,4 @@ const SelectBrokerStep = () => {
   );
 };
 
-export default SelectBrokerStep;
+export default ChooseBrokerStep;

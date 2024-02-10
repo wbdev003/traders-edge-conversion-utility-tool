@@ -17,7 +17,7 @@ const GetStartedStep = () => {
       </div>
       <ul className="list-decimal pl-6">
         <li className="text-base mb-4">
-          Click on {""}
+          Click on
           <span className="font-semibold">&ldquo;Get Started.&rdquo;</span> to
           begin the conversion process.
         </li>

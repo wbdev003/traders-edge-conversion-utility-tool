@@ -157,18 +157,24 @@ export async function errorCasePromise(
     }
   } else if (selectedBroker === "ibkr") {
     if (
-      checkArrayEqual(args[8], [
-        "Date",
-        "Activity",
-        "Symbol",
-        "Symbol Description",
-        "Quantity",
-        "Price",
-        "Settlement Date",
-        "Account",
-        "Value",
-        "Currency",
-        "Description",
+      checkArrayEqual(args[0], [
+        "Statement",
+        "Header",
+        "Field Name",
+        "Field Value",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
       ])
     ) {
       return ibkrTradeFilter(args);

@@ -4,7 +4,7 @@ import { useFormStepStore } from "@/store/useFormStepStore";
 import { useSelectionStore } from "@/store/useSelectionStore";
 import { useFileUploadStore } from "@/store/useFileUploadStore";
 import FormStructure from "./FormStructure/FormStructureLayout";
-import SelectBrokerStep from "./FormSteps/SelectBrokerStep";
+import ChooseBrokerStep from "./FormSteps/ChooseBrokerStep";
 import UploadFileStep from "./FormSteps/UploadFileStep";
 import DisplayDataStep from "./FormSteps/DisplayDataStep";
 import FormButtonsLayout from "../Common/Buttons/FormButtonsLayout";
@@ -94,7 +94,7 @@ const MultiStepForm: React.FC = () => {
           title={formFields[formStep].title}
           description={formFields[formStep].description}
         >
-          {formStep === 1 && <SelectBrokerStep />}
+          {formStep === 1 && <ChooseBrokerStep />}
           {formStep === 2 &&
             (loading ? <LoadingSpinner /> : <UploadFileStep />)}
           {formStep === 3 && <DisplayDataStep />}

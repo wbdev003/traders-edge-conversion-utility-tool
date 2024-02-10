@@ -13,43 +13,7 @@ export function ibkrTradeFilter(data: any): Array<Array<string>> {
 
     for (let j = 0; j < data[i].length; j++) {
       // Looks through every column by index and changes it based on requirements
-      if (j === 2) {
-        if (data[i][j] === "Buy") {
-          temp.push("BUY");
-          temp.push(data[i][j]);
-        } else if (data[i][j] === "Sell") {
-          temp.push("SELL");
-          temp.push(data[i][j]);
-        } else {
-          temp.push("unallocated");
-          temp.push(data[i][j]);
-        }
-      } else if (j === 11) {
-        temp.push(data[i][j] + data[i][10]);
-      } else if (j === 4) {
-        const name = data[i][4].split("COM")[0];
-        console.log(name);
-        temp.push(name);
-      } else if (j === 3) {
-        const symbol = data[i][j].split(".");
-        temp.push(symbol[0]);
-        if (symbol[1] === "TO") {
-          temp.push("TSX");
-        } else if (symbol[1] === "VN") {
-          temp.push("TSXV");
-        } else {
-          temp.push("other");
-        }
-      } else if (j === 0 || j === 1) {
-        const myDate = data[i][j];
-        const newDate = myDate.split(" ")[0];
-        temp.push(newDate);
-      } else if (j === 9) {
-        temp.push(String(Math.abs(data[i][9])));
-      } else if (j === 5) {
-        temp.push(String(Math.abs(data[i][j])));
-      } else if (j === 6) {
-        temp.push((Math.abs(data[i][9]) / Math.abs(data[i][5])).toFixed(4));
+      if (j === 1) {
       } else {
         temp.push(data[i][j].replace(/(\r\n|\n|\r)/gm, ""));
       }
