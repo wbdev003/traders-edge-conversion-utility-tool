@@ -59,22 +59,22 @@ const FormButtonsLayout = ({
         (disabledCondition ? (
           <Button
             disabled
-            className="flex m-0 w-fit p-0 px-2 pl-5 bg-slate-700 rounded-full"
+            className="flex m-0 w-fit p-0 px-2 pl-5 bg-blue-500 hover:bg-blue-500 rounded-full"
             onClick={() => {
               btn2Function();
             }}
           >
-            <p className="text-md">{btn2Title}</p>
+            <p className="text-base font-semibold">{btn2Title}</p>
             <Icons type="next" size={25} color="white" />
           </Button>
         ) : (
           <Button
-            className="flex m-0 w-fit p-0 px-2 pl-5 bg-slate-700 rounded-full"
+            className="flex m-0 w-fit p-0 px-2 pl-5 bg-blue-600 hover:bg-blue-600 rounded-full"
             onClick={() => {
               btn2Function();
             }}
           >
-            <p className="text-md">{btn2Title}</p>
+            <p className="text-base font-semibold">{btn2Title}</p>
             <Icons type="next" size={25} color="white" />
           </Button>
         ))}

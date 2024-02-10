@@ -4,7 +4,7 @@ import { useFormStepStore } from "@/store/useFormStepStore";
 import Container from "../Utils/Container/Container";
 import ProgressBar from "./ProgressBar/ProgressBar";
 import ExitButton from "../Buttons/ExitButton";
-import FormButtonsLayout from "@/components/MultiStepForm/FormStructure/FormButtons/FormButtonsLayout";
+import FormButtonsLayout from "@/components/Common/Buttons/FormButtonsLayout";
 import { FormFields } from "@/models/clientModels";
 import { useSelectionStore } from "@/store/useSelectionStore";
 import { useFileUploadStore } from "@/store/useFileUploadStore";

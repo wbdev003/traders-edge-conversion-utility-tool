@@ -7,7 +7,7 @@ import FormStructure from "./FormStructure/FormStructureLayout";
 import SelectBrokerStep from "./FormSteps/SelectBrokerStep";
 import UploadFileStep from "./FormSteps/UploadFileStep";
 import DisplayDataStep from "./FormSteps/DisplayDataStep";
-import FormButtonsLayout from "./FormStructure/FormButtons/FormButtonsLayout";
+import FormButtonsLayout from "../Common/Buttons/FormButtonsLayout";
 import useLeavePageWarning from "@/hooks/useLeavePageWarning";
 import useToggleModal from "@/hooks/useToggleModal";
 import { FormFields } from "@/models/clientModels";
