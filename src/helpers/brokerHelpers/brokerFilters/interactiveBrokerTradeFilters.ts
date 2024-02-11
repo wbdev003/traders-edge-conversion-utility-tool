@@ -8,14 +8,18 @@ import { mapToProperFormat } from "../brokerhelpers";
 export function ibkrTradeFilter(data: any): Array<Array<string>> {
   const final: Array<Array<string>> = [];
 
-  for (let i = 1; i < data.length; i++) {
+  // Extract Acount Number
+  const accountNumber = data[8][3];
+
+  for (let i = 28; i < data.length; i++) {
     const temp: Array<string> = [];
 
-    for (let j = 0; j < data[i].length; j++) {
+    for (let j = 4; j < data[i].length; j++) {
       // Looks through every column by index and changes it based on requirements
-      if (j === 1) {
+      if (j === 0) {
+        temp.push(accountNumber);
       } else {
-        temp.push(data[i][j].replace(/(\r\n|\n|\r)/gm, ""));
+        temp.push(data[i][j]);
       }
     }
 
@@ -25,14 +29,14 @@ export function ibkrTradeFilter(data: any): Array<Array<string>> {
     }
   } // Converts all of the important columns into proper format
   return mapToProperFormat(final, {
-    13: 0,
-    0: 1,
-    1: 2,
+    0: 0, // Account Number
+    1: 1,
+    2: 2,
     4: 3,
     5: 4,
     16: 5,
     3: 6,
-    2: 7,
+    42: 7,
     7: 8,
     8: 9,
     11: 10,

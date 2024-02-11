@@ -64,19 +64,19 @@ const DownloadCSVButton = ({ data, fileName }: DownloadCSVButtonProps) => {
     <>
       {!isLoading ? (
         <Button
-          className="bg-slate-700 m-0 p-0 px-2 pr-4 pl-5 w-fit text-slate-200 rounded-full"
+          className="bg-blue-600 hover:bg-blue-600  m-0 p-0 px-2 pr-4 pl-5 w-fit text-slate-200 rounded-full"
           onClick={handleDownload}
         >
-          <p className="pr-1 text-md">Download CSV</p>
+          <p className="pr-1 text-base font-semibold">Download CSV</p>
           <Icons type="download" size={20} color="white"></Icons>
         </Button>
       ) : (
         <Button
           disabled
-          className="bg-slate-700 m-0 p-0 px-2 pr-4 pl-5 w-fit text-slate-200 rounded-full"
+          className="bg-blue-600 hover:bg-blue-600 m-0 p-0 px-2 pr-4 pl-5 w-fit text-slate-200 rounded-full"
         >
           <Loader2 className="mr-2 h-4 w-4 animate-spin" />
-          <p className="text-md">Please wait</p>
+          <p className="text-base font-semibold">Please wait</p>
         </Button>
       )}
     </>
