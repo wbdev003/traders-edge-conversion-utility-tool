@@ -1,7 +1,7 @@
 import { tdTradeFilter } from "./brokerFilters/tdTradeFilters";
 import { questTradeFilter } from "./brokerFilters/questTradeFilters";
 import { rbcTradeFilter } from "./brokerFilters/rbcTradeFilters";
-import { ibkrTradeFilter } from "./brokerFilters/ibkrTradeFilters";
+import { ibkrTradeFilter } from "./brokerFilters/interactiveBrokerTradeFilters";
 import { scotiaTradeFilter } from "./brokerFilters/scotiaTradeFilters";
 import { vbTradeFilter } from "./brokerFilters/vbTradeFilter";
 import { cibcTradeFilter } from "./brokerFilters/cibcTradeFilters";

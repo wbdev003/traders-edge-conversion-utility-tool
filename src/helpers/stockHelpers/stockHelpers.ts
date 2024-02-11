@@ -36,3 +36,13 @@ export function mapTransactionType(teType: string): string {
   const result = transactionTypeMap[teType?.toUpperCase()] || "unallocated"; // Default to 'Unallocated' if not found
   return result;
 }
+
+export function determineAction(string: string): string {
+  if (string === "O") {
+    return "BUY";
+  } else if (string === "C") {
+    return "SELL";
+  } else {
+    return "unallocated";
+  }
+}
