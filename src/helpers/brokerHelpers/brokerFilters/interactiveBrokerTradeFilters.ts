@@ -70,9 +70,11 @@ export function ibkrTradeFilter(data: any): Array<Array<string>> {
           }
         }
 
-        temp[priceUnitIndex] = `${Math.abs(data[i][11] / data[i][8]).toFixed(
+        temp[priceUnitIndex] = `${Math.abs(data[i][12] / data[i][7]).toFixed(
           4
         )}`;
+
+        console.log(data[i][7]);
       }
     }
     /* */
