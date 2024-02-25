@@ -25,11 +25,11 @@ const brokerData = [
     title: "National Bank",
     identifier: "nationalMulti",
   },
-  /* {
+  {
     img: bmoLogo,
     title: "BMO InvestorLine",
     identifier: "bmo",
-  }, */
+  },
 ];
 const ChooseBrokerStep = () => {
   return (

@@ -7,6 +7,7 @@ import { vbTradeFilter } from "./brokerFilters/vbTradeFilter";
 import { cibcTradeFilter } from "./brokerFilters/cibcTradeFilters";
 import { nationalMultiTradeFilter } from "./brokerFilters/nationalMultiTradeFilter";
 import { fetchEODData } from "../stockHelpers/stockHelpers";
+import { bmoTradeFiter } from "./brokerFilters/bmoTradeFilters";
 
 // Define a variable to hold the selected type (questrade, TD, RBC)
 export const header = [
@@ -220,6 +221,25 @@ export async function errorCasePromise(
       ])
     ) {
       return vbTradeFilter(args);
+    } else {
+      return false;
+    }
+  } else if (selectedBroker === "bmo") {
+    if (
+      checkArrayEqual(args[1], [
+        "Transaction Date",
+        "Settlement Date",
+        "Activity Description",
+        "Description",
+        "Symbol",
+        "Quantity",
+        "Price",
+        "Price Currency",
+        "Total Amount",
+        "Total Currency",
+      ])
+    ) {
+      return bmoTradeFiter(args);
     } else {
       return false;
     }
