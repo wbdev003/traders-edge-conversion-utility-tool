@@ -1,7 +1,7 @@
 import React from "react";
 import Container from "../Utils/Container/Container";
 import Image from "next/image";
-import logo from "./../../../../public/images/traders-edge-logo.png";
+import logo from "../../../../public/images/investor-base-logo.jpg";
 
 const Nav = () => {
   return (
